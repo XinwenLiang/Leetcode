@@ -9,7 +9,7 @@
   <img src="https://github.com/user-attachments/assets/18beb37f-a637-4ce9-b231-efcef0e55658" alt="图片1" width="600">
 </p>
 
-3. 区间为左闭右开的情况[left, right),当中间值大于target时，需要改变右端点，因为是开区间，可以直接执行right = middle(因为middle不会取到)
+2. 区间为左闭右开的情况[left, right),当中间值大于target时，需要改变右端点，因为是开区间，可以直接执行right = middle(因为middle不会取到)
 当中间值大于target时，需要改变左端点，但是不可以取到middle，所以left = middle + 1;
 
 <p align="center">
