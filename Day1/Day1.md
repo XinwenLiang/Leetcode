@@ -18,8 +18,20 @@
 
 ## 2. Remove Element
 * Given an integer array nums and an integer val, remove all occurrences of val in nums in-place. The order of the elements may be changed. Then return the number of elements in nums which are not equal to val.
-
 Consider the number of elements in nums which are not equal to val be k, to get accepted, you need to do the following things:
-
 Change the array nums such that the first k elements of nums contain the elements which are not equal to val. The remaining elements of nums are not important as well as the size of nums.
 Return k.
+* 思路：首先想到的是可以使用暴力求解法，即通过两个循环，将不需去除的元素向左移覆盖需要删除的元素；除此之外可以通过双指针求解，我们用快指针来获取新数组的元素，用慢指针更新位置。具体代码如图所示。
+* 图1：暴力求解法：
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/2162d200-1f20-4026-95fe-faaa164ee38d" alt="图片3" width="600">
+</p>
+
+* 图2：快慢指针法：
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/ff6402ea-81c9-408d-a1e0-874016312e9a" alt="图片4" width="600">
+</p>
+
+
