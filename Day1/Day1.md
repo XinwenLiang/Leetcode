@@ -5,15 +5,12 @@
 1. 区间为左闭右闭的情况[left, right],当中间值大于target的时候，需要改变右端点，又因为右区间为闭区间，middle不可以取到，所以执行right = middle -1;
 当中间值小于target时，需要改变左端点，同上缘由，执行left = middle + 1;
 
-![image](https://github.com/user-attachments/assets/18beb37f-a637-4ce9-b231-efcef0e55658)
-
-3. 区间为左闭右开的情况[left, right),当中间值大于target时，需要改变右端点，因为是开区间，可以直接执行right = middle(因为middle不会取到)
-当中间值大于target时，需要改变左端点，但是不可以取到middle，所以left = middle + 1;
-
-![image](https://github.com/user-attachments/assets/7f01cd03-4144-4b68-9b42-18347d077cd7)
 <p align="center">
   <img src="https://github.com/user-attachments/assets/18beb37f-a637-4ce9-b231-efcef0e55658" alt="图片1" width="600">
 </p>
+
+3. 区间为左闭右开的情况[left, right),当中间值大于target时，需要改变右端点，因为是开区间，可以直接执行right = middle(因为middle不会取到)
+当中间值大于target时，需要改变左端点，但是不可以取到middle，所以left = middle + 1;
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/7f01cd03-4144-4b68-9b42-18347d077cd7" alt="图片2" width="600">
