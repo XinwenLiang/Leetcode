@@ -34,4 +34,44 @@ Return k.
   <img src="https://github.com/user-attachments/assets/ff6402ea-81c9-408d-a1e0-874016312e9a" alt="图片4" width="600">
 </p>
 
+## 3. Squares of Sorted Array
+* Given an integer array nums sorted in non-decreasing order, return an array of the squares of each number sorted in non-decreasing order.
+* 思路：首先想到的是可以先生成平方数组，然后按照冒泡排序方法将其按照升序排列。其次我们可以使用双指针法，因为最大值肯定不会出现在数组中间，只有可能出现在负数最小值和正数最大值之间，
+  所以我们将一个指针指向数组最左边，另一个指向数组最右边。如果left的值大于right值，则左指针右移；如果right值大于left值，则右指针左移。直到两指针相遇，循环结束。
+
+  图1：暴力求解法：
+  
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/172e023d-ffe3-46ae-bf36-b7e131289849" alt="图片5" width="600">
+</p>
+
+图2：双指针法：
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/4de77c89-7abe-4982-8002-c4f21d51093a" alt="图片6" width="600">
+</p>
+
+### The secret of getting ahead is getting started. -- Mark Twain
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
