@@ -17,13 +17,16 @@
 ## Spiral Matrix
 * Given a positive integer n, generate an n x n matrix filled with elements from 1 to n2 in spiral order.
 * 思路可以参考下图，因为直接思考n个元素有些复杂，我们以n=3为例，去看如何循环。通过观察规律不难发现，矩阵的圈数是int(n/2)即需要向下取整，然后分别循环四条边即可。
+  （画图会让整个思路很清晰，强烈建议大家画个图，一目了然）
 
   <p align="center">
   <img src="https://github.com/user-attachments/assets/746ea714-ce51-43c6-851d-d7279f371da2" alt="图片3" width="600">
 </p>
 
 * 代码如下
-* 
+  
 <p align="center">
   <img src="https://github.com/user-attachments/assets/bbf6381f-67da-41a2-b22a-80f9c1e88435" alt="图片3" width="600">
 </p>
+
+## In all the shabby fading, please shine forever.
