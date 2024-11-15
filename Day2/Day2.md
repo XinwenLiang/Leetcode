@@ -62,7 +62,7 @@ Given a positive integer `n`, generate an **n x n matrix** filled with elements 
 (Drawing a diagram makes the entire idea much clearer. I strongly recommend you to draw one for better understanding at a glance.)
 
   <p align="center">
-  <img src="https://github.com/user-attachments/assets/746ea714-ce51-43c6-851d-d7279f371da2" alt="图片3" width="600">
+  <img src="https://github.com/user-attachments/assets/746ea714-ce51-43c6-851d-d7279f371da2" alt="图片3" width="700">
 </p>
 
 ```Java
