@@ -152,6 +152,37 @@ public class RangeSum {
     }
 }
 ```
+## [44.Purchase of land by developers](https://kamacoder.com/problempage.php?pid=1044)
+
+**Problem Description**<br>
+
+In a city's region, it is divided into `n * m` contiguous blocks, each with a different weight representing the land value of that block. Currently, two companies, Company A and Company B, want to purchase the land in this city's region.<br>
+
+Now, you need to divide all blocks in the city's region into two sub-regions, assigned to Company A and Company B, respectively. However, due to city planning restrictions, the region can only be divided horizontally or vertically into two sub-regions. Each sub-region must contain one or more blocks, and blocks cannot be further subdivided.<br>
+
+To ensure fairness, you need to find a way to divide the region such that the absolute difference between the total land value of the blocks in Company A's sub-region and Company B's sub-region is minimized.
+
+**Interpretation**
+
+The objective of this problem is to divide an `n × m` rectangular area into two sub-areas to be allocated to firms A and B, and to ensure that the **difference** in the total value of land in the areas allocated to the two firms is **minimised**.
+
+* Restrictions on the way it can be divided:
+  A rectangle can only be divided into two consecutive sub-areas by a single line: horizontal or vertical.
+
+  **Idea**:
+* Brute Force Approach:
+
+Horizontal Division: Try splitting the region below each row, calculating the total value of the top and bottom parts. 
+Vertical Division: Try splitting the region to the right of each column, calculating the total value of the left and right parts.
+For all possible division methods, calculate the difference in total values of the two parts and find the smallest difference.
+
+* Optimized Approach (Using Prefix Sum):
+
+Precompute the prefix sums for each row and each column to quickly calculate the total value of any region.
+Use the prefix sum to reduce redundant calculations and improve efficiency.
+
+```Java
+
 
 
 
