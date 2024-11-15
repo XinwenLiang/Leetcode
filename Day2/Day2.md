@@ -105,6 +105,57 @@ public class SpiralMatrix {
     }
 }
 ```
+
+## [58.Interval Sum](https://kamacoder.com/problempage.php?pid=1070)
+
+Given an integer array Array, calculate the sum of elements within the specified intervals.
+**Input**: The first line of input provides the length of the integer array, n.
+The next n lines each contain a single integer, representing the elements of the array.
+The following input contains the intervals for which the sum of elements needs to be calculated, continuing until the end of the file.
+**Output**: Output the sum of elements for each specified interval.
+
+**Idea**: We can use prefix sum concept to solve the problem, the process is as followed.
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/da3ac810-be92-4e38-a7e6-bd70bfd992f1" alt="图片3" width="600">
+</p>
+
+```Java
+public class RangeSum {
+    public static void main(String[] args) {
+        Scanner myScanner = new Scanner(System.in);
+        int n = myScanner.nextInt();
+        int[] vec = new int[n];
+        int[] p = new int[n];
+        int preSum = 0;
+        
+        // Read the array elements and calculate the prefix sum
+        for (int i = 0; i < n; i++) {
+            vec[i] = myScanner.nextInt();
+            preSum += vec[i];
+            p[i] = preSum;
+        }
+        // Get the interval through input.
+        while (myScanner.hasNextInt()){
+            int a = myScanner.nextInt();
+            int b = myScanner.nextInt();
+
+            int sum;
+            if(a==0){
+                sum = p[b];
+            }else{
+                sum = p[b] - p[a-1];
+            }
+            System.out.println(sum);
+        }
+        myScanner.close();
+    }
+}
+```
+
+
+
+
 ## In all the shabby fading, please shine forever.
 
 <p align="center">
