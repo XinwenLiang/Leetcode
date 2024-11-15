@@ -1,32 +1,113 @@
 # 代码随想录算法训练营第二天
-## Minimum Size Subarray Sum
-* Given an array of positive integers nums and a positive integer target, return the minimal length of a
-  subarray whose sum is greater than or equal to target. If there is no such subarray, return 0 instead.
-* 思路：可以使用暴力解法，使用两个for循环分别代表区间起点和区间终点。优化算法是利用滑动窗口思想，其实与昨天双指针相比，本题不过是取到双指针中间部分。
-  我们可以不断调整起点和终点位置，直到我们找到满足条件的最小长度的数组。用一个for循环来表示滑动窗口，如果我们选择起点作为循环变量会发现依旧会陷入暴力
-解法的循环中，所以我们应该选取终点作为循环变量，具体代码如图所示。
+## [209.Minimum Size Subarray Sum](https://leetcode.com/problems/minimum-size-subarray-sum/)
 
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/f36937a0-fff0-4b46-bf7a-9a90e94b4b55" alt="图片1" width="600">
-</p>
+Given an array of positive integers `nums` and a positive integer `target`, return the **minimal length** of a <br>
+subarray whose sum is greater than or equal to `target`. If there is no such subarray, return `0` instead.
 
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/c53aae8b-f4b0-42be-8779-1e5b70414d7b" alt="图片2" width="600">
-</p>
+**Idea**: A brute force solution can be used by employing two `for` loops to represent the start and end of the interval, respectively.<br>
+An optimized approach utilizes the `sliding window` technique, which is essentially similar to the `two-pointer` method discussed yesterday, <br>
+but here we consider the portion between the `two pointers`.We can continuously adjust the starting and ending positions until we find the subarray <br>
+with the minimum length that satisfies the condition. Using a `for` loop to represent the `sliding window`, if we choose the starting point as the loop <br>
+variable, we would still fall into the brute force approach. Therefore, we should select the endpoint as the loop variable.
 
-## Spiral Matrix
-* Given a positive integer n, generate an n x n matrix filled with elements from 1 to n2 in spiral order.
-* 思路可以参考下图，因为直接思考n个元素有些复杂，我们以n=3为例，去看如何循环。通过观察规律不难发现，矩阵的圈数是int(n/2)即需要向下取整，然后分别循环四条边即可。
-  （画图会让整个思路很清晰，强烈建议大家画个图，一目了然）
+```Java
+// Brute force method
+public class minSubArrayLen {
+    public static int minSubArrayLen(int target, int[] nums) {
+        int result = Integer.MAX_VALUE; //Initialize the maximum value of type int.
+        int sum = 0;
+        int subLength = 0;
+        for (int i = 0; i < nums.length; i++) { //Set the starting point of the subsequence to be i.
+            sum = 0;
+            for (int j = i; j < nums.length; j++) {//Set the end point of the subsequence to be j.
+                sum += nums[j];
+                if (sum >= target) {
+                    subLength = j - i + 1;
+                    result = Math.min(result, subLength);
+                    break; //Once meet the condition, break the loop.
+                }
+            }
+        }
+        return result == Integer.MAX_VALUE ? 0 : result;
+    }
+}
+
+// Sliding window method
+public class minSubArrLen {
+    public static int minSubArrLen(int target, int[] nums) {
+        int left = 0; // Starting point.
+        int sum = 0;
+        int result = Integer.MAX_VALUE;
+        for (int i = 0; i < nums.length; i++) { // The end point.
+            sum += nums[i];
+            while (sum >= target) {
+                result = Math.min(result, i - left + 1);
+                sum -= nums[left];//Removes the elements on the left border of the window from the sum in an attempt to shrink the window
+                left++;
+            }
+        }
+        return result != Integer.MAX_VALUE ? result : 0;
+    }
+}
+```
+
+## [59.Spiral Matrix](https://leetcode.com/problems/spiral-matrix-ii/)
+
+Given a positive integer `n`, generate an **n x n matrix** filled with elements from 1 to n2 in **spiral order**.
+
+ **Idea**: You can refer to the diagram below. Since directly analyzing n elements can be complex, we take `n = 3` as an example to understand how the loop works.<br>
+ By observing the pattern, it is easy to find that the number of layers in the matrix is `int(n / 2)`, where the result is rounded down. <br>
+ Then, we iterate through the four sides of each layer.
+
+(Drawing a diagram makes the entire idea much clearer. I strongly recommend you to draw one for better understanding at a glance.)
 
   <p align="center">
   <img src="https://github.com/user-attachments/assets/746ea714-ce51-43c6-851d-d7279f371da2" alt="图片3" width="600">
 </p>
 
-* 代码如下
-  
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/bbf6381f-67da-41a2-b22a-80f9c1e88435" alt="图片3" width="600">
-</p>
+```Java
+public class SpiralMatrix {
+    public static int[][] generateMatrix(int n) {
+        int[][] nums = new int[n][n];
+        int startX = 0;
+        int startY = 0; //Set the start point as (0,0)
+        int offset = 1; // Set the variable to control the end position.
+        int count = 1; // The element in the matrix.
+
+        while (startX <= n / 2) {
+            for (int j = startY; j < n - offset; j++) {
+                nums[startX][j] = count;
+                count++;
+            }
+
+            for (int i = startX; i < n - offset; i++) {
+                nums[i][n - offset] = count;
+                count++;
+            }
+
+            for (int j = n - offset; j > startY; j--) {
+                nums[n - offset][j] = count;
+                count++;
+            }
+
+            for (int i = n - offset; i > startX; i--) {
+                nums[i][startY] = count;
+                count++;
+            }
+            startY++;
+            startX++;
+            offset++;
+            if (n % 2 != 0) {
+                nums[n / 2][n / 2] = n * n;
+            }
+        }
+        return nums;
+    }
+}
 
 ## In all the shabby fading, please shine forever.
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/419dae10-6ef0-4dd4-9c4c-c0917d723b94" alt="图片3" width="600">
+</p>
+
