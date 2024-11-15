@@ -29,31 +29,77 @@ public class BinarySearch {
         }
         return -1;
     }
+```
 
-2. 区间为左闭右开的情况[left, right),当中间值大于target时，需要改变右端点，因为是开区间，可以直接执行right = middle(因为middle不会取到)
-当中间值大于target时，需要改变左端点，但是不可以取到middle，所以left = middle + 1;
+2. For the left-closed, right-open interval [left, right):<br>
 
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/7f01cd03-4144-4b68-9b42-18347d077cd7" alt="图片2" width="600">
-</p>
+* When the middle value is greater than the `target`, we need to adjust the right endpoint. Since it is an open interval, we can directly execute `right = middle` (because middle is not included in the interval).
 
-## 2. Remove Element
-* Given an integer array nums and an integer val, remove all occurrences of val in nums in-place. The order of the elements may be changed. Then return the number of elements in nums which are not equal to val.
-Consider the number of elements in nums which are not equal to val be k, to get accepted, you need to do the following things:
-Change the array nums such that the first k elements of nums contain the elements which are not equal to val. The remaining elements of nums are not important as well as the size of nums.
-Return k.
-* 思路：首先想到的是可以使用暴力求解法，即通过两个循环，将不需去除的元素向左移覆盖需要删除的元素；除此之外可以通过双指针求解，我们用快指针来获取新数组的元素，用慢指针更新位置。具体代码如图所示。
-* 图1：暴力求解法：
+* When the middle value is less than the `target`, we need to adjust the left endpoint. However, middle cannot be included, so we execute `left = middle + 1`.
 
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/2162d200-1f20-4026-95fe-faaa164ee38d" alt="图片3" width="600">
-</p>
+```Java
+public class BinarySearch {
+// Case2: Left-closed and right-opened interval.
+  public static int BinarySearch(int[] arr, int target) {
+        int left = 0;
+        int right = arr.length;
+        if (target >= arr[left] && target <= arr[arr.length- 1]) {
+            while (left < right) {
+                int middle = (right + left) / 2;
+                if (arr[middle] < target) {
+                    left = middle + 1;
+                } else if (arr[middle] > target) {
+                    right = middle;
+                } else {
+                    return middle;
+                }
+            }
+        }
+        return -1;
+    }
+```
 
-* 图2：快慢指针法：
+## [27.Remove Element](https://leetcode.com/problems/remove-element/)
 
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/ff6402ea-81c9-408d-a1e0-874016312e9a" alt="图片4" width="600">
-</p>
+Given an integer array `nums` and an integer `val`, remove all occurrences of `val` in `nums` in-place. The order of the elements may be changed. Then return the number of elements in `nums` which are not equal to `val`.<br>
+Consider the number of elements in `nums` which are not equal to `val` be `k`, to get accepted, you need to do the following things:
+* Change the array `nums` such that the first `k` elements of `nums` contain the elements which are not equal to `val`. The remaining elements of `nums` are not important as well as the size of `nums`.
+* Return `k`.
+
+** Idea **：The first approach that comes to mind is using the brute force method, which involves two loops to shift the elements that don't need to be removed to the left, overwriting the elements that need to be deleted. Alternatively, we can use the two-pointer technique: the fast pointer is used to retrieve the elements for the new array, while the slow pointer is used to update their positions.
+
+```Java
+// Brute force method
+public class RemoveElement {
+    public static int removeElement(int[] nums, int val) {
+        int n = nums.length;
+        for (int i = 0; i < n; i++) {
+            if (nums[i] == val) {
+                for (int j = i; j < n - 1; j++) {
+                    nums[j] = nums[j+1];
+                }
+                i--;
+                n--;
+            }
+        }
+        return n;
+    }
+}
+
+// Two pointers method
+public class RemoveElement02 {
+ public static int removeElement(int[] nums, int val) {
+    int slow = 0;
+    for (int fast = 0; fast < nums.length; fast++){
+        if(nums[fast] != val){
+            nums[slow] = nums[fast];
+            slow++;
+        }
+    }
+    return slow;
+    }
+}
+```
 
 ## 3. Squares of Sorted Array
 * Given an integer array nums sorted in non-decreasing order, return an array of the squares of each number sorted in non-decreasing order.
@@ -73,6 +119,10 @@ Return k.
 </p>
 
 ### The secret of getting ahead is getting started. -- Mark Twain
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/0bbb3879-19fa-47b0-a48d-b6f8936c5b88" alt="图片6" width="600">
+</p>
 
 
 
