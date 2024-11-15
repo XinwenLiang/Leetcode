@@ -121,8 +121,9 @@ public class RemoveElement02 {
 ### The secret of getting ahead is getting started. -- Mark Twain
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/0bbb3879-19fa-47b0-a48d-b6f8936c5b88" alt="图片6" width="600">
+  <img src="https://github.com/user-attachments/assets/ad241a24-1ea7-47e5-afe9-18ed0310a885" alt="图片6" width="600">
 </p>
+
 
 
 
