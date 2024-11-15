@@ -9,12 +9,14 @@ public class RangeSum {
         int[] vec = new int[n];
         int[] p = new int[n];
         int preSum = 0;
+
+        // Read the array elements and calculate the prefix sum
         for (int i = 0; i < n; i++) {
             vec[i] = myScanner.nextInt();
             preSum += vec[i];
             p[i] = preSum;
         }
-
+        // Get the interval through input.
         while (myScanner.hasNextInt()){
             int a = myScanner.nextInt();
             int b = myScanner.nextInt();
