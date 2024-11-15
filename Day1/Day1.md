@@ -3,7 +3,7 @@
 
 Given an array of integers `nums` which is sorted in ascending order, and an integer `target`, write a function to search `target` in `nums`. If `target` exists, then return its index. Otherwise, return `-1`. You must write an algorithm with `O(log n)` runtime complexity.
 
-** Idea **：We need to use two pointers, one pointing to the start and the other to the end of the array. By comparing the middle value with the target, we decide which pointer to move. There are two different implementations: one where the interval is left-closed and right-closed, and another where it is left-closed and right-open.
+**Idea**：We need to use two pointers, one pointing to the start and the other to the end of the array. By comparing the middle value with the target, we decide which pointer to move. There are two different implementations: one where the interval is left-closed and right-closed, and another where it is left-closed and right-open.
 
 1. For the left-closed, right-closed interval `[left, right]`:<br>
 * When the middle value is greater than the `target`, we need to adjust the right endpoint. Since the right interval is closed, middle cannot be included, so we execute `right = middle - 1`.
@@ -40,7 +40,7 @@ public class BinarySearch {
 ```Java
 public class BinarySearch {
 // Case2: Left-closed and right-opened interval.
-  public static int BinarySearch(int[] arr, int target) {
+    public static int BinarySearch(int[] arr, int target) {
         int left = 0;
         int right = arr.length;
         if (target >= arr[left] && target <= arr[arr.length- 1]) {
@@ -66,7 +66,7 @@ Consider the number of elements in `nums` which are not equal to `val` be `k`, t
 * Change the array `nums` such that the first `k` elements of `nums` contain the elements which are not equal to `val`. The remaining elements of `nums` are not important as well as the size of `nums`.
 * Return `k`.
 
-** Idea **：The first approach that comes to mind is using the brute force method, which involves two loops to shift the elements that don't need to be removed to the left, overwriting the elements that need to be deleted. Alternatively, we can use the two-pointer technique: the fast pointer is used to retrieve the elements for the new array, while the slow pointer is used to update their positions.
+**Idea**：The first approach that comes to mind is using the brute force method, which involves two loops to shift the elements that don't need to be removed to the left, overwriting the elements that need to be deleted. Alternatively, we can use the two-pointer technique: the fast pointer is used to retrieve the elements for the new array, while the slow pointer is used to update their positions.
 
 ```Java
 // Brute force method
@@ -88,7 +88,7 @@ public class RemoveElement {
 
 // Two pointers method
 public class RemoveElement02 {
- public static int removeElement(int[] nums, int val) {
+  public static int removeElement(int[] nums, int val) {
     int slow = 0;
     for (int fast = 0; fast < nums.length; fast++){
         if(nums[fast] != val){
@@ -101,22 +101,57 @@ public class RemoveElement02 {
 }
 ```
 
-## 3. Squares of Sorted Array
-* Given an integer array nums sorted in non-decreasing order, return an array of the squares of each number sorted in non-decreasing order.
-* 思路：首先想到的是可以先生成平方数组，然后按照冒泡排序方法将其按照升序排列。其次我们可以使用双指针法，因为最大值肯定不会出现在数组中间，只有可能出现在负数最小值和正数最大值之间，
-  所以我们将一个指针指向数组最左边，另一个指向数组最右边。如果left的值大于right值，则左指针右移；如果right值大于left值，则右指针左移。直到两指针相遇，循环结束。
+## [977.Squares of Sorted Array](https://leetcode.com/problems/squares-of-a-sorted-array/)
 
-  图1：暴力求解法：
-  
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/172e023d-ffe3-46ae-bf36-b7e131289849" alt="图片5" width="600">
-</p>
+Given an integer array `nums` sorted in **non-decreasing** order, return an array of the squares of each number sorted in **non-decreasing** order.
 
-图2：双指针法：
+**Idea**：The first approach that comes to mind is to first generate an array of squares and then sort it in ascending order using the bubble sort method. Alternatively, we can use the two-pointer technique. Since the maximum value will not appear in the middle of the array, it can only be between the smallest negative number and the largest positive number. Thus, we place one pointer at the leftmost end of the array and the other at the rightmost end. If the value at left is greater than the value at `right`, move the `left` pointer to the `right`; if the value at `right` is greater than the value at `left`, move the `right` pointer to the `left`. The process continues until the two pointers meet, at which point the loop ends.
 
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/4de77c89-7abe-4982-8002-c4f21d51093a" alt="图片6" width="600">
-</p>
+ ```Java
+// Brute force method
+public class SquaresOfSortedArray {
+    public static int[] sortedSquares(int[] nums) {
+        int[] arrNew = new int[nums.length];
+        for (int i = 0; i < nums.length; i++) {
+            arrNew[i] = nums[i] * nums[i];
+        }
+        // Sort the new array using the bubble sort method.
+        int temp = 0;
+        for (int i = 0; i < arrNew.length - 1; i++) {
+            for (int j = 0; j < arrNew.length - 1; j++) {
+                if (arrNew[j] > arrNew[j + 1]) {
+                    temp = arrNew[j];
+                    arrNew[j] = arrNew[j + 1];
+                    arrNew[j + 1] = temp;
+                }
+            }
+        }
+        return arrNew;
+    }
+}
+
+// Two pointers method
+public class SquaresOfSortedArray02 {
+   public static int[] sortedSquares(int[] nums) {
+        int left = 0;
+        int right = nums.length - 1;
+        int index = nums.length - 1;
+        int[] arrNew = new int[nums.length];
+        while (left <= right) {
+            if (nums[left] * nums[left] > nums[right] * nums[right]) {
+                arrNew[index] = nums[left] * nums[left];
+                index--;
+                left++;
+            } else {
+                arrNew[index] = nums[right] * nums[right];
+                index--;
+                right--;
+            }
+        }
+        return arrNew;
+    }
+}
+```
 
 ### The secret of getting ahead is getting started. -- Mark Twain
 
