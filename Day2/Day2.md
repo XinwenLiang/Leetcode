@@ -172,8 +172,8 @@ The objective of this problem is to divide an `n × m` rectangular area into two
   **Idea**:
 * Brute Force Approach:
 
-Horizontal Division: Try splitting the region below each row, calculating the total value of the top and bottom parts. 
-Vertical Division: Try splitting the region to the right of each column, calculating the total value of the left and right parts.
+Horizontal Division: Try splitting the region below each row, calculating the total value of the top and bottom parts.<br> 
+Vertical Division: Try splitting the region to the right of each column, calculating the total value of the left and right parts.<br>
 For all possible division methods, calculate the difference in total values of the two parts and find the smallest difference.
 
 * Optimized Approach (Using Prefix Sum):
