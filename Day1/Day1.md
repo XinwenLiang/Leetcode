@@ -1,11 +1,43 @@
 # 代码随想录算法训练营第一天
 ## [704. Binary Search](https://leetcode.com/problems/binary-search/)
 
-* Given an array of integers `nums` which is sorted in ascending order, and an integer `target`, write a function to search `target` in `nums`. If `target` exists, then return its index. Otherwise, return `-1`. You must write an algorithm with `O(log n)` runtime complexity.
+Given an array of integers `nums` which is sorted in ascending order, and an integer `target`, write a function to search `target` in `nums`. If `target` exists, then return its index. Otherwise, return `-1`. You must write an algorithm with `O(log n)` runtime complexity.
 
-* 思路：我们需要借助左右两个指针分别指向数组的首尾，通过判断中间值来决定移动左右指针中的哪一个指针。有两种不同写法：区间为左闭右闭以及区间为左闭右开：
-1. 区间为左闭右闭的情况[left, right],当中间值大于target的时候，需要改变右端点，又因为右区间为闭区间，middle不可以取到，所以执行right = middle -1;
-当中间值小于target时，需要改变左端点，同上缘由，执行left = middle + 1;
+** Idea **：We need to use two pointers, one pointing to the start and the other to the end of the array. By comparing the middle value with the target, we decide which pointer to move. There are two different implementations: one where the interval is left-closed and right-closed, and another where it is left-closed and right-open.
+
+1. For the left-closed, right-closed interval `[left, right]`:
+When the middle value is greater than the `target`, we need to adjust the right endpoint. Since the right interval is closed, middle cannot be included, so we execute `right = middle - 1`.
+When the middle value is less than the `target`, we need to adjust the left endpoint. For the same reason, we execute `left = middle + 1`.
+
+```Java
+public class BinarySearch {
+    public static void main(String[] args) {
+        int[] arr = {-1, 0, 3, 5, 9, 12};
+        int target1 = 9;
+        int target2 = 2;
+        System.out.println(search(arr, target1));
+        System.out.println(search(arr, target2));
+        System.out.println(BinarySearch(arr, target1));
+        System.out.println(BinarySearch(arr, target2));
+    }
+    // Case1: Left-closed and right-closed interval.
+    public static int search(int[] arr, int target) {
+        int left = 0;
+        int right = arr.length - 1;
+        if (target >= arr[0] && target <= arr[arr.length - 1]) {
+            while (left <= right) {
+                int middle = (left + right) / 2;
+                if (arr[middle] > target) {
+                    right = middle - 1;
+                } else if (arr[middle] < target) {
+                    left = middle + 1;
+                } else {
+                    return middle;
+                }
+            }
+        }
+        return -1;
+    }
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/18beb37f-a637-4ce9-b231-efcef0e55658" alt="图片1" width="600">
