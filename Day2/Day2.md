@@ -114,7 +114,7 @@ The next n lines each contain a single integer, representing the elements of the
 The following input contains the intervals for which the sum of elements needs to be calculated, continuing until the end of the file.
 **Output**: Output the sum of elements for each specified interval.
 
-**Idea**: We can use prefix sum concept to solve the problem, the process is as followed.
+**Idea**: We can use **prefix sum** concept to solve the problem, the process is as followed.
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/da3ac810-be92-4e38-a7e6-bd70bfd992f1" alt="图片3" width="600">
@@ -182,6 +182,52 @@ Precompute the prefix sums for each row and each column to quickly calculate the
 Use the prefix sum to reduce redundant calculations and improve efficiency.
 
 ```Java
+// Optimized brute force method.
+public class LandPurchase {
+    public static void main(String[] args) {
+        Scanner myScanner = new Scanner(System.in);
+        int n = myScanner.nextInt();
+        int m = myScanner.nextInt();
+        int sum = 0;
+        int[][] vec = new int[n][m];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                vec[i][j] = myScanner.nextInt();
+                sum += vec[i][j]; // Calculate the total value of the land.
+            }
+        }
+        int result = Integer.MAX_VALUE;
+        int count = 0;//Used to store the cumulative sum of traversed areas.
+
+        // Horizontal division.
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                count += vec[i][j];
+                // Update the minimum difference when traversing to the end of the row.
+                if(j==m-1){
+                    result = Math.min(result, Math.abs(sum-2*count));
+                }
+            }
+        }
+
+        // Vertical division.
+        count = 0;
+        for (int j = 0; j < m; j++) {
+            for (int i = 0; i < n; i++) {
+                count += vec[i][j];
+                // Update the minimum difference when traversing to the end of the column.
+                if(i==n-1){
+                    result = Math.min(result, Math.abs(sum-2*count));
+                }
+            }
+        }
+        System.out.println(result);
+        myScanner.close();
+    }
+}
+
+// Prefix sum method
+
 
 
 
