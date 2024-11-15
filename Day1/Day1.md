@@ -6,8 +6,8 @@ Given an array of integers `nums` which is sorted in ascending order, and an int
 ** Idea **：We need to use two pointers, one pointing to the start and the other to the end of the array. By comparing the middle value with the target, we decide which pointer to move. There are two different implementations: one where the interval is left-closed and right-closed, and another where it is left-closed and right-open.
 
 1. For the left-closed, right-closed interval `[left, right]`:<br>
-*When the middle value is greater than the `target`, we need to adjust the right endpoint. Since the right interval is closed, middle cannot be included, so we execute `right = middle - 1`.
-*When the middle value is less than the `target`, we need to adjust the left endpoint. For the same reason, we execute `left = middle + 1`.
+* When the middle value is greater than the `target`, we need to adjust the right endpoint. Since the right interval is closed, middle cannot be included, so we execute `right = middle - 1`.
+* When the middle value is less than the `target`, we need to adjust the left endpoint. For the same reason, we execute `left = middle + 1`.
 
 ```Java
 public class BinarySearch {
