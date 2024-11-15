@@ -166,8 +166,7 @@ To ensure fairness, you need to find a way to divide the region such that the ab
 
 The objective of this problem is to divide an `n × m` rectangular area into two sub-areas to be allocated to firms A and B, and to ensure that the **difference** in the total value of land in the areas allocated to the two firms is **minimised**.
 
-* Restrictions on the way it can be divided:
-  A rectangle can only be divided into two consecutive sub-areas by a single line: horizontal or vertical.
+Restrictions on the way it can be divided: A rectangle can only be divided into two consecutive sub-areas by a single line: horizontal or vertical.
 
   **Idea**:
 * Brute Force Approach:
