@@ -6,8 +6,8 @@ subarray whose sum is greater than or equal to `target`. If there is no such sub
 
 **Idea**: A brute force solution can be used by employing two `for` loops to represent the start and end of the interval, respectively.<br>
 An optimized approach utilizes the `sliding window` technique, which is essentially similar to the `two-pointer` method discussed yesterday, <br>
-but here we consider the portion between the `two pointers`.We can continuously adjust the starting and ending positions until we find the subarray <br>
-with the minimum length that satisfies the condition. Using a `for` loop to represent the `sliding window`, if we choose the starting point as the loop <br>
+but here we consider the portion between the `two pointers`.We can continuously adjust the starting and ending positions until we find the subarray
+with the minimum length that satisfies the condition. Using a `for` loop to represent the `sliding window`, if we choose the starting point as the loop 
 variable, we would still fall into the brute force approach. Therefore, we should select the endpoint as the loop variable.
 
 ```Java
@@ -56,7 +56,7 @@ public class minSubArrLen {
 Given a positive integer `n`, generate an **n x n matrix** filled with elements from 1 to n2 in **spiral order**.
 
  **Idea**: You can refer to the diagram below. Since directly analyzing n elements can be complex, we take `n = 3` as an example to understand how the loop works.<br>
- By observing the pattern, it is easy to find that the number of layers in the matrix is `int(n / 2)`, where the result is rounded down. <br>
+ By observing the pattern, it is easy to find that the number of layers in the matrix is `int(n / 2)`, where the result is rounded down. 
  Then, we iterate through the four sides of each layer.
 
 (Drawing a diagram makes the entire idea much clearer. I strongly recommend you to draw one for better understanding at a glance.)
