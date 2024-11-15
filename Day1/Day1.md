@@ -5,21 +5,12 @@ Given an array of integers `nums` which is sorted in ascending order, and an int
 
 ** Idea **：We need to use two pointers, one pointing to the start and the other to the end of the array. By comparing the middle value with the target, we decide which pointer to move. There are two different implementations: one where the interval is left-closed and right-closed, and another where it is left-closed and right-open.
 
-1. For the left-closed, right-closed interval `[left, right]`:
+1. For the left-closed, right-closed interval `[left, right]`:<br>
 When the middle value is greater than the `target`, we need to adjust the right endpoint. Since the right interval is closed, middle cannot be included, so we execute `right = middle - 1`.
 When the middle value is less than the `target`, we need to adjust the left endpoint. For the same reason, we execute `left = middle + 1`.
 
 ```Java
 public class BinarySearch {
-    public static void main(String[] args) {
-        int[] arr = {-1, 0, 3, 5, 9, 12};
-        int target1 = 9;
-        int target2 = 2;
-        System.out.println(search(arr, target1));
-        System.out.println(search(arr, target2));
-        System.out.println(BinarySearch(arr, target1));
-        System.out.println(BinarySearch(arr, target2));
-    }
     // Case1: Left-closed and right-closed interval.
     public static int search(int[] arr, int target) {
         int left = 0;
@@ -38,10 +29,6 @@ public class BinarySearch {
         }
         return -1;
     }
-
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/18beb37f-a637-4ce9-b231-efcef0e55658" alt="图片1" width="600">
-</p>
 
 2. 区间为左闭右开的情况[left, right),当中间值大于target时，需要改变右端点，因为是开区间，可以直接执行right = middle(因为middle不会取到)
 当中间值大于target时，需要改变左端点，但是不可以取到middle，所以left = middle + 1;
