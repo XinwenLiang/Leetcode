@@ -207,10 +207,9 @@ class MyLinkedList {
         size--;
     }
 }
+```
 
-
-
-
+```Java
 // Doubly Linked List.
 public class DesignLinkedList2 {
     int size;
