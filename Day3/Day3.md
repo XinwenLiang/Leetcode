@@ -65,7 +65,7 @@ Given the `head` of a linked and an integer `var`, remove all the nodes of the l
 1. Remove nodes directly using the original linked table
 2. Introduce 'dummy head' to help.
 
-**Method1:**To delete node 6, we simply need to update the pointer pointing to node 6 to point to the next node after node 6.
+**Method1** To delete node 6, we simply need to update the pointer pointing to node 6 to point to the next node after node 6.
 
 <img width="959" alt="4105a8d3c1ff67e2c019f0c5c751f79" src="https://github.com/user-attachments/assets/92140dc8-2daf-475f-9024-9b34027e2329">
 
