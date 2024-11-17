@@ -102,6 +102,26 @@ class ListNode {
 }
 ```
 
+**Method2** Create a dummy head, and then execute the delete operation like normal linked list.
+
+```Java
+// Method2: Create a dummy head.
+    public ListNode remove(ListNode head, int val){
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+
+        ListNode cur = dummy;
+        while(cur.next != null){
+            if(cur.next.val == val){
+                cur.next = cur.next.next;
+            }else{
+                cur = cur.next;
+            }
+        }
+        return dummy.next;
+    }
+```
+
 
 
 
