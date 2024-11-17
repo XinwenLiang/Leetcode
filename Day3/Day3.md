@@ -46,11 +46,13 @@
 }
 // Define the method of linked list
 class LinkedList {
-    private Node head; // head node.
-    // Constructor and initialize a null linked list.
-    public LinkedList() {
-        this.head = null;
-    }
+  private Node head; // head node.
+
+  // Constructor and initialize a null linked list.
+  public LinkedList() {
+    this.head = null;
+  }
+}
 ```
 
 ## [203. Remove Linked List Elements](https://leetcode.com/problems/remove-linked-list-elements/description/)
