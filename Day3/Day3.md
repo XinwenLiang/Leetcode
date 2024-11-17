@@ -23,7 +23,9 @@
 * Circular Linked List
   Circular linked list is a linked list which is connected end-to-end.
 
-  ![Circular Linked List](https://github.com/user-attachments/assets/bb57d239-4868-44e0-b383-829d2e6884d7)
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/bb57d239-4868-44e0-b383-829d2e6884d7" alt="图片3" width="600">
+</p>
 
   **The storage method of a linked list**
 
