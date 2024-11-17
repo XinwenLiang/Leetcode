@@ -37,7 +37,7 @@ public class RemoveElement {
 
 class ListNode {
     int val;
-    ListNode next;
+    ListNode next, prev;
     ListNode(){}
 
     ListNode(int val) {

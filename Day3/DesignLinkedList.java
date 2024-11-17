@@ -5,7 +5,7 @@ public class DesignLinkedList {
     ListNode head;
 
     // Initialize the linked list
-    public void SingleLinkedList() {
+    public DesignLinkedList() {
         size = 0;
         head = new ListNode(0);
     }
@@ -63,7 +63,7 @@ public class DesignLinkedList {
 
     // Delete the index-th node.
     public void deleteAtIndex(int index){
-        if (index < 0 || index > size){
+        if (index < 0 || index >= size){
             return;
         }
         // Here the head is the dummy head.
