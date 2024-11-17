@@ -69,6 +69,33 @@ Given the `head` of a linked and an integer `var`, remove all the nodes of the l
 <img width="723" alt="1c7fcb773bccfa352ad79ec3d8a1cdb" src="https://github.com/user-attachments/assets/c8b4c3bc-11a0-4891-bd43-ad36d5da793f">
 
 ```Java
+public class RemoveElement {
+    public ListNode removeElement(ListNode head, int val) {
+        // If head is equal to the value, change the head to the next.
+        while (head != null && head.val == val) {
+            head = head.next;
+        }
+        // Create a new pointer variable used for iterating the linked list from a new head.
+        ListNode curr = head;
+        while (curr != null && curr.next != null) {
+            if (curr.next.val == val) {
+                curr.next = curr.next.next;
+            }
+        }
+        return head;
+    }
+}
+
+class ListNode {
+    int val;
+    ListNode next;
+
+    ListNode(int val) {
+        this.val = val;
+        this.next = null;
+    }
+}
+```
 
 
 
