@@ -286,6 +286,59 @@ public class DesignLinkedList2 {
   }
 }
 ```
+## [206. Reverse Linked List](https://leetcode.com/problems/reverse-linked-list/description/)
+Given the `head` of a singly linked list, reverse the list, and return the reversed list.
+
+**Example1**
+![image](https://github.com/user-attachments/assets/7f34ac7d-4912-4cb0-93fd-eade10538dee)
+**Input**: head = [1,2,3,4,5]
+**Output**: [5,4,3,2,1]
+
+**Idea**
+1. Two pointer `cur` and `prev`.
+2. Recursion
+
+**Two Pointer Method**
+```Java
+public ListNode reverseList(ListNode head){
+        ListNode prev = null;
+        ListNode cur = head;
+        while (cur != null){
+            ListNode temp = cur.next;
+            cur.next = prev;
+            prev = cur;
+            cur = temp;
+        }
+    return prev;
+    }
+```
+
+**Recursion**
+```Java
+public ListNode reverseList(ListNode head) {
+        return reverse(head, null);
+    }
+
+    public ListNode reverse(ListNode cur, ListNode prev) {
+        if (cur == null) {
+            return prev;
+        }
+        ListNode temp = cur.next;
+        cur.next = prev;
+        return reverse(temp, cur);
+    }
+```
+
+## Sweet are the uses of adversity.
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/b225e1a8-552f-479a-86b5-a5c6835c52c9" alt="图片3" width="600">
+</p>
+
+
+
+
+
 
 
 
