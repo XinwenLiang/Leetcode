@@ -35,15 +35,16 @@
   **Definition**
   ```Java
   class Node {
-    int data; // stored data.
-    Node next; // pointer linked with the next node.
+  int data; // stored data.
+  Node next; // pointer linked with the next node.
 
-    // Constructor.
-    public Node(int data) {
-        this.data = data;
-        this.next = null;
-    }
+  // Constructor.
+  public Node(int data) {
+    this.data = data;
+    this.next = null;
+  }
 }
+
 // Define the method of linked list
 class LinkedList {
   private Node head; // head node.
