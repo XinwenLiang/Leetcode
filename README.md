@@ -1,4 +1,4 @@
-# 代码随想录算法训练营
+# 代码随想录算法训练营|目录
 Clocking in on a 60-day algorithm boot camp
 ## Day1
 * Binary Search
