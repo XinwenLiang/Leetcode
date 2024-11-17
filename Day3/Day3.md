@@ -291,6 +291,7 @@ Given the `head` of a singly linked list, reverse the list, and return the rever
 
 **Example1**
 ![image](https://github.com/user-attachments/assets/7f34ac7d-4912-4cb0-93fd-eade10538dee)
+
 **Input**: head = [1,2,3,4,5]
 **Output**: [5,4,3,2,1]
 
