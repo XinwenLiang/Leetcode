@@ -7,3 +7,9 @@ Clocking in on a 60-day algorithm boot camp
 ## Day2
 * Minimum Size Subarray Sum
 * Spiral Matrix
+* Land Purchase Problem
+* Range Sum
+
+## Day3
+* Remove Element
+* Design Linked List
