@@ -138,7 +138,9 @@ The inputs to the **judge** are given as follows (your program is **not** given 
 The judge will then create the linked structure based on these inputs and pass the two heads, `headA` and `headB` to your program. If you correctly return the intersected node, then your solution will be **accepted**.
 
 **Example1:**
+
 ![image](https://github.com/user-attachments/assets/5f8e4f44-0a78-4dbc-989e-a4df79a1f878)
+
 **Input:** intersectVal = 8, listA = [4,1,8,4,5], listB = [5,6,1,8,4,5], skipA = 2, skipB = 3
 **Output:** Intersected at '8'
 **Explaination:**  The intersected node's value is 8 (note that this must not be 0 if the two lists intersect).
