@@ -147,6 +147,18 @@ The judge will then create the linked structure based on these inputs and pass t
 From the head of A, it reads as [4,1,8,4,5]. From the head of B, it reads as [5,6,1,8,4,5]. There are 2 nodes before the intersected node in A; There are 3 nodes before the intersected node in B.
 - Note that the intersected node's value is not 1 because the nodes with value 1 in A and B (2nd node in A and 3rd node in B) are different node references. In other words, they point to two different locations in memory, while the nodes with value 8 in A and B (3rd node in A and 4th node in B) point to the same location in memory.
 
+**Idea:** Actually, we need to return the pointer which point to the intersection of two linked list.<br>
+**Step1** : Get the lengths of two linked list and their differnece.
+**Step2**: Let `curA` move to the end of `curB`.
+
+![image](https://github.com/user-attachments/assets/13f5dd54-9877-4645-8f7e-181e3ddf8622)
+
+**Step3:** Compare if the values are the same. If they are different, Move the pointer backward. If they are the same, then we find the intersection.
+
+```Java
+
+
+
 
 
  
