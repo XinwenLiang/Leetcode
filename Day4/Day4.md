@@ -241,7 +241,7 @@ Specifically, define a pointer index1 at the meeting point and another pointer i
 
 Let index1 and index2 move simultaneously, one node at a time. The point where they meet will be the entry node of the cycle.
 
-Here is the animation (from 代码随想录）:(https://github.com/leetcode-master/blob/master/problems/0142.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II.md)
+Here is the animation (from https://github.com/youngyangyang04/leetcode-master):
 
 
 ![142.环形链表II（求入口）](https://code-thinking.cdn.bcebos.com/gifs/142.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II%EF%BC%88%E6%B1%82%E5%85%A5%E5%8F%A3%EF%BC%89.gif) 
