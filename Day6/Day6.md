@@ -9,7 +9,7 @@ Given two strings `s` and `t`, return `true` if `t` is an anagram of `s`, and `f
 
 **Ideas:**
 * Use brute-force method: We can transform the strings to char arrays, sort them and then compare if they are equal.<br>
-Time complexity: (O(nlogn))
+Time complexity: O(nlogn)
 
 * Optimized method: Define a hash array of length 26 to store the frequency of each character. Then, traverse the string `s` to count the frequency of each letter and store it in the hash array. Next, traverse the string `t`, subtracting the frequency of each letter directly from the values in the hash array. If the final array contains all zeros, it indicates that the two strings are valid anagrams.
 
