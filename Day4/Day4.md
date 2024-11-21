@@ -224,7 +224,53 @@ There is a cycle in a linked list if there is some node in the list that can be 
 **Explanation:** There is a cycle in the linked list, where tail connects to the second node.
 
 **Idea**<br>
-* 
+* The first problem is how to determine if a linked list has one or more cycle. <br>
+We can use two pointers method, a fast pointer and a slow pointer. If the linked list is a straight line, they can never meet. That means if they can meet, the linked list must have at least one cycle. Therefore, we let the fast pointer move two steps at a time, and the slow pointer move one step at a time.
+
+* The second problem is how to find the entrance to the cycle.<br>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/f1045f45-d44c-4ccf-a0f4-62dede3044c2" alt="图片3" width="600">
+</p>
+
+When fast and slow pointers meet, slow = x + y, fast = x + y + n(y + z), n is the number of cycles the fast pointer has moved.<br>
+Then we have a equation: 2(x + y) = x + y + n(y + z). By simplification, we can get x + y = n(y + z), when n = 1, x = z.<br>
+This means that if one pointer starts from the head node and another starts from the meeting point, both moving one step at a time, they will meet at the entry node of the cycle.
+
+Specifically, define a pointer index1 at the meeting point and another pointer index2 at the head node.
+
+Let index1 and index2 move simultaneously, one node at a time. The point where they meet will be the entry node of the cycle.
+
+Here is the animation:
+
+
+![142.环形链表II（求入口）](https://code-thinking.cdn.bcebos.com/gifs/142.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II%EF%BC%88%E6%B1%82%E5%85%A5%E5%8F%A3%EF%BC%89.gif)
+
+```Java
+public class LinkedListCycle {
+    public ListNode detectCycle(ListNode head){
+        ListNode fast = head;
+        ListNode slow = head;
+        while(fast != null && fast.next != null){// Because fast moves two paces in each step.
+            fast = fast.next.next;
+            slow = slow.next;
+            if(fast == slow){ // If they can meet, it means the linked list has a cycle.
+               ListNode index1 = fast;
+               ListNode index2 = head;
+               while(index1 != index2){
+                   index1 = index1.next;
+                   index2 = index2.next;
+               }
+               return index1;
+            }
+        }
+
+        return null;
+    }
+}
+```
+
+
 
 
 
