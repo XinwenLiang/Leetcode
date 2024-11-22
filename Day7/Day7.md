@@ -186,6 +186,85 @@ public class ThreeSums {
 }
 ```
 
+## [18. 4Sum](https://leetcode.com/problems/4sum/description/)
+
+Given an array `nums` of `n` integers, return an array of all the **unique** quadruplets `[nums[a], nums[b], nums[c], nums[d]]` such that:
+
+* `0 <= a, b, c, d < n`
+* `a`, `b`, `c`, and `d` are distinct.
+* `nums[a] + nums[b] + nums[c] + nums[d] == target`
+
+You may return the answer in **any order**.
+
+**Example 1:** <br>
+
+**Input:** nums = [1,0,-1,0,-2,2], target = 0 <br>
+**Output:** [[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]
+
+**Ideas:**
+
+In fact, most of the logic overlaps with the three-sum problem. The main difference is that an additional loop for the new number `k` is added outside, with pruning and deduplication operations applied to both `k` and `i`.
+
+* First-level pruning condition: `nums[k] > target && nums[k] > 0 && target > 0` (If the current number exceeds the target or is positive, stop further exploration).<br>
+* First-level deduplication condition: `k > 0 && nums[k] == nums[k-1]`  (Skip duplicate values for `k` when the `target` is positive).<br>
+* Second-level pruning condition: `ums[k] + nums[i] > target && nums[k] + nums[i] > 0 && target > 0` (If the sum of `nums[k]` and `nums[i]` exceeds the `target` or is positive, stop further exploration for this combination).<br>
+* Second-level deduplication condition: `i == k + 1 && nums[i] == nums[i-1]` (Skip duplicate values for `i`, ensuring that only unique pairs are considered after fixing `k`).
+
+```Java
+public class FourSums {
+    public List<List<Integer>> fourSum(int[] nums, int target) {
+        Arrays.sort(nums);
+        List<List<Integer>> result = new ArrayList<>();
+        for (int k = 0; k < nums.length; k++) {
+            if (nums[k] > target && nums[k] > 0 && target > 0) {
+                break; //First level pruning operation.
+            }
+            if (k > 0 && nums[k] == nums[k - 1]) {
+                continue; // First level deduplication operation.
+            }
+            for (int i = k + 1; i < nums.length; i++) {
+                int sum1 = nums[i] + nums[k];
+                if (sum1 > target && sum1 > 0 && target > 0) {
+                    break; // Second level pruning operation.
+                }
+                if (i > k + 1 && nums[i] == nums[i - 1]) {
+                    continue;
+                }
+                int sum = 0;
+                int left = i + 1;
+                int right = nums.length - 1;
+                while (right > left) {
+                    sum = nums[k] + nums[i] + nums[right] + nums[left];
+                    if (sum > target) {
+                        right--;
+                    } else if (sum < target) {
+                        left++;
+                    } else {
+                        result.add(Arrays.asList(nums[k], nums[i], nums[left], nums[right]));
+                        while (right > left && nums[right] == nums[right - 1]) right--;
+                        while (right > left && nums[left] == nums[left + 1]) left++;
+
+                        right--;
+                        left++;
+                    }
+                }
+            }
+        }
+        return result;
+    }
+}
+```
+
+## [Every single day counts.](https://c6.y.qq.com/base/fcgi-bin/u?__=19GTxFF7P0Aa) 
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/2510cb9f-9fdd-4a1f-a92a-62be2caf2a6f" alt="图片3" width="600">
+</p>
+
+
+
+
+
 
 
 
