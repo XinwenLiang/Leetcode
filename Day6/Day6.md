@@ -185,6 +185,17 @@ You can return the answer in any order.
 
 **Ideas:**
 
+* When we need to check whether an element has appeared before or if it exists in a collection, the first method that comes to mind is hashing.
+  
+* In this problem, since we not only need to know whether an element has been traversed but also require the index of the element, we consider using a map structure.
+  
+* The purpose of the map is to store the elements we have visited, as we need to keep track of which elements and their corresponding indices we have traversed while iterating through the array. This allows us to find a matching element (i.e., one that adds up to the target with the current element).
+
+*   Since we are looking up traversed elements, the key is the element, and the value is its index.
+
+```Java
+
+
 
 
 
