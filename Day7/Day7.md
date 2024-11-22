@@ -255,7 +255,7 @@ public class FourSums {
 }
 ```
 
-## Every single day counts.(https://c6.y.qq.com/base/fcgi-bin/u?__=19GTxFF7P0Aa) 
+## [Every single day counts.](https://c6.y.qq.com/base/fcgi-bin/u?__=19GTxFF7P0Aa) 
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/2510cb9f-9fdd-4a1f-a92a-62be2caf2a6f" alt="图片3" width="600">
