@@ -64,7 +64,62 @@ Each letter in `magazine` can only be used once in `ransomNote`.
 **Input:** ransomNote = "a", magazine = "b" <br>
 **Output:** false
 
-**Ideas:**
+**Ideas:** From the problem description, we can sense that this question is quite similar to the valid anagram problem we solved before. Therefore, we can use a brute force method or utilize a hash array to solve it.
+
+**Hash Array Method:** Since the problem states that there are **only lowercase letters**, we can create an array of length 26 to store the frequency of each letter in the `magazine`. Then, we iterate the `ransomNote` to check whether the corresponding letters exist in the array. If they do, return `true`; otherwise, return `false`.
+
+```Java
+// Brute-force method.
+public class RansomNote {
+    public boolean canConstruct(String ransomNote, String magazine) {
+        if (ransomNote.length() == 0) { // If the ransomNote is empty, return true.
+            return true;
+        }
+        // Transform the string into char array so that we can modify the elements in it.
+        char[] magazineChars = magazine.toCharArray();
+        // Iterate elements in ransomNote to check if we can find it in the magazine.
+        for (int i = 0; i < ransomNote.length(); i++) {
+            char target = ransomNote.charAt(i);
+            boolean found = false;
+            for (int j = 0; j < magazineChars.length; j++) {
+                if (magazineChars[j] == target) {
+                    magazineChars[j] = '*'; // Mark the letter as used.
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+// Hash-Array method.
+ public boolean canConstruct(String ransomNote, String magazine) {
+        if(ransomNote.length() > magazine.length()){
+            return false;
+        }
+        int[] arr1 = new int[26];
+        // Iterate the magazine to store the number of every element in it.
+        for (int i = 0; i < magazine.length(); i++) {
+            arr1[magazine.charAt(i) - 'a'] ++;
+        }
+        // Iterate the ransomNote to look up if the element exists in the magazine.
+        for(int j =0; j < ransomNote.length(); j++){
+            arr1[ransomNote.charAt(j)-'a']--;
+        }
+        // If there exists negative number in arr1, that means there is element in ransomNote cannot find in magazine.
+        for(int i : arr1){
+            if(i < 0){
+                return false;
+            }
+        }
+        return true;
+    }
+}
+```
 
 
 
