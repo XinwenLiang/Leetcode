@@ -136,11 +136,55 @@ Notice that the solution set must not contain duplicate triplets.
 
 **Explanation:**
 
-nums[0] + nums[1] + nums[2] = (-1) + 0 + 1 = 0.
-nums[1] + nums[2] + nums[4] = 0 + 1 + (-1) = 0.
-nums[0] + nums[3] + nums[4] = (-1) + 2 + (-1) = 0.
-The distinct triplets are [-1,0,1] and [-1,-1,2].
-Notice that the order of the output and the order of the triplets does not matter.
+nums[0] + nums[1] + nums[2] = (-1) + 0 + 1 = 0.<br>
+nums[1] + nums[2] + nums[4] = 0 + 1 + (-1) = 0.<br>
+nums[0] + nums[3] + nums[4] = (-1) + 2 + (-1) = 0.<br>
+The distinct triplets are [-1,0,1] and [-1,-1,2].<br>
+Notice that the order of the output and the order of the triplets does not matter.<br>
+
+**Ideas:**
+
+Since this problem involves removing duplicates, it can be challenging to solve using hashing. So, we shift our approach to the two-pointer method.<br>
+First, we sort the array in ascending order. Then, we iterate through the array, fixing one element a at a time. We set two pointers: `left` pointing to `i + 1` and `right` pointing to the end of the array. If the sum of the three numbers is greater than 0, we move the `right` pointer to the `left`; if the sum is less than 0, we move the `left` pointer to the `right`.
+
+The most crucial part is **handling duplicate elements**. Before moving the pointers, we ensure that duplicates of a are skipped by checking the condition `nums[i] == nums[i - 1]`. After obtaining a valid result, we also skip duplicates of b and c to avoid missing a valid result.
+
+```Java
+public class ThreeSums {
+    public List<List<Integer>> threeSum(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        Arrays.sort(nums);
+        // Look up a+b+c=0, a = nums[i], b = nums[left], c = nums[right]
+        for (int i = 0; i < nums.length; i++) {
+            if(nums[i] > 0){
+                return result;
+            }
+            if(i > 0 && nums[i]==nums[i-1]){// Remove the duplicate result for a.
+                continue;
+            }
+            int left = i +1;
+            int right = nums.length -1;
+            while(right > left){
+                int sum = nums[i] + nums[left] + nums[right];
+                if(sum> 0){ // If a+b+c>0, that means we need to reduce the sum.
+                    right--;
+                }else if(sum< 0){// If a+b+c<0, that means we need to increase the sum.
+                    left ++;
+                }else{
+                    result.add(Arrays.asList(nums[i], nums[left],nums[right]));
+                    // Remove the duplicate b and c.
+                    while(right > left && nums[right] == nums[right-1]) right --;
+                    while(right > left && nums[left] == nums[left+1]) left++;
+
+                    right--;
+                    left++;
+                }
+            }
+        }
+        return result;
+    }
+}
+```
 
 
 
