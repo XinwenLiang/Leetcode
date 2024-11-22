@@ -17,6 +17,15 @@ The two tuples are:
 1. (0, 0, 0, 1) -> nums1[0] + nums2[0] + nums3[0] + nums4[1] = 1 + (-2) + (-1) + 2 = 0 
 2. (1, 1, 0, 0) -> nums1[1] + nums2[1] + nums3[0] + nums4[0] = 2 + (-1) + (-1) + 0 = 0
 
-**Ideas:**
+**Ideas:** <br>
+1. First, define a map to store the frequency of sums of elements from arrays A and B. The key represents the sum of elements, and the value represents how many times this sum occurs.
+
+2. Iterate through arrays A and B to calculate the sum of their elements (a + b), record the frequency of each sum, and store it in the map.
+
+3. Then, iterate through arrays C and D, and for each sum (c + d), check if the map contains the value 0 - (c + d). If it exists, add the corresponding value in the map to the count variable. 
+
+4. Finally, return the value of the count variable.
+
+```Java
 
 
