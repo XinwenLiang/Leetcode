@@ -140,6 +140,32 @@ A **happy number** is a number defined by the following process:
 * Those numbers for which this process **ends in 1** are happy.
 * Return `true` if `n` is a happy number, and `false` if not.
 
+**Ideas:** We can store the sum of squares in a hash set to check loops. If it fails to break the loop, then it cannot be a happy number.<br>
+The loop condition is `n != 1` and `! set.contains(n)` (n never appears in the set)
+
+```Java
+public class HappyNumber {
+    public boolean isHappy(int n){
+        Set<Integer> result = new HashSet<>();
+        while (n != 1 && !result.contains(n)) {
+            result.add(n);
+            n = sumOfSquares(n);
+        }
+        return n == 1;
+
+    }
+
+    public int sumOfSquares(int num) {
+        int sum = 0;
+        while (num > 0) {
+            int digit = num % 10;
+            sum = sum + digit * digit;
+            num = num / 10;
+        }
+        return sum;
+    }
+}
+
 
 
 
