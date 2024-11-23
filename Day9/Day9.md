@@ -75,3 +75,78 @@ public class ReverseWords {
     }
 }
 ```
+
+## [55.Right Rotate String](https://kamacoder.com/problempage.php?pid=1065)
+
+The right rotation operation of a string moves the last `k` characters of the string to the front. Given a string `s` and a positive integer `k`, write a function to perform the right rotation operation on the string. 
+
+**Example1:**
+
+**Input:** k = 2, s ="abcdefg"
+
+**Output:** "fgabcde"
+
+**Ideas:**
+
+Similar to the previous problem, we divide the string into two parts using the positive integer `k`: the first `n-k` characters and the last `k` characters. First, we reverse the entire string, and then we reverse the first `k` characters and the last `n-k` characters separately. This gives us the desired result.
+
+```Java
+import java.util.Scanner;
+
+public class RightRotate {
+    public static void main(String[] args) {
+        Scanner myScanner = new Scanner(System.in);
+        int n = Integer.parseInt(myScanner.nextLine());
+        String s = myScanner.nextLine();
+
+        int len = s.length();
+        char[] ch = s.toCharArray();
+        reverseString(ch, 0, len - 1);
+        reverseString(ch, 0, n - 1);
+        reverseString(ch, n, len - 1);
+        System.out.println(ch);
+    }
+
+    public static void reverseString(char[] chars, int left, int right) {
+        while (left < right) {
+            char temp = chars[left];
+            chars[left] = chars[right];
+            chars[right] = temp;
+            left++;
+            right--;
+        }
+    }
+}
+```
+
+## Miracles happen every day.
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/f47eea66-df8a-4712-9d77-475a78e36f50" alt="图片3" width="600">
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
