@@ -106,7 +106,7 @@ public class ReplaceNumber {
 }
 ```
 
-## The light which puts out our eyes is darkness to us. Only that day downs to which we are awake. There is more day to dawn. The sun is but a morning star.
+## The light which puts out our eyes is darkness to us. Only that day dawns to which we are awake. There is more day to dawn. The sun is but a morning star.
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/1a9ee541-c3d9-4b5c-9588-8f373611ac6f" alt="图片3" width="600">
