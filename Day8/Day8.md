@@ -62,9 +62,55 @@ public class ReverseString02 {
 }
 ```
 
+## [54. Replace Numbers](https://kamacoder.com/problempage.php?pid=1064)
 
+Given a string `s` that contains lowercase letters and digit characters, write a function to replace each digit character in the string with `"number"` while keeping the letter characters unchanged. 
 
+**Example1:**
 
+**Input:** a1b2c3<br>
+**Output:** anumberbnumbercnumber
+
+```Java
+public class ReplaceNumber {
+    public static void main(String[] args) {
+        Scanner myScanner = new Scanner(System.in);
+        String s = myScanner.next();
+        int len = s.length();
+        // Get the size of new array.
+        for (int i = 0; i < len; i++) {
+            if (s.charAt(i) >= '0' && s.charAt(i) <= '9') {
+                len += 5; // If the element is a number, it will increase the space by 5.
+            }
+        }
+        char[] result = new char[len];
+        // Copy the original string s.
+        for (int i = 0; i < s.length(); i++) {
+            result[i] = s.charAt(i);
+        }
+        // Iterate the new char array from the end to the beginning.
+        for (int i = s.length() - 1, j = len - 1; i >= 0; i--) {
+            if (result[i] >= '0' && result[i] <= '9') {
+                result[j--] = 'r';
+                result[j--] = 'e';
+                result[j--] = 'b';
+                result[j--] = 'm';
+                result[j--] = 'u';
+                result[j--] = 'n';
+            } else {
+                result[j--] = result[i];
+            }
+        }
+        System.out.println(result);
+    }
+}
+```
+
+## The light which puts out our eyes is darkness to us. Only that day downs to which we are awake. There is more day to dawn. The sun is but a morning star.
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/1a9ee541-c3d9-4b5c-9588-8f373611ac6f" alt="图片3" width="600">
+</p>
 
 
 
