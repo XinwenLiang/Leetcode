@@ -1,5 +1,5 @@
 # 代码随想录算法训练营第十天
-## [Implement Queue Using Stacks](https://leetcode.com/problems/implement-queue-using-stacks/description/)
+## [232. Implement Queue Using Stacks](https://leetcode.com/problems/implement-queue-using-stacks/description/)
 
 Implement a first in first out (FIFO) queue using only two stacks. The implemented queue should support all the functions of a normal queue (`push`, `peek`, `pop`, and `empty`).
 
@@ -73,6 +73,80 @@ public class MyQueue {
     // Check if the queue is empty.
     public boolean empty() {
         return stackIn.isEmpty() && stackOut.isEmpty();
+    }
+}
+```
+
+## [225. Implement Stack Using Queues](https://leetcode.com/problems/implement-stack-using-queues/description/)
+
+Implement a last-in-first-out (LIFO) stack using only two queues. The implemented stack should support all the functions of a normal stack (`push`, `top`, `pop`, and `empty`).
+
+Implement the MyStack class:
+
+* `void push(int x)` Pushes element x to the top of the stack.
+* `int pop()` Removes the element on the top of the stack and returns it.
+* `int top()` Returns the element on the top of the stack.
+* `boolean empty()` Returns true if the stack is empty, false otherwise.
+
+**Notes:**
+
+* You must use **only** standard operations of a queue, which means that only `push to back`, `peek/pop from front`, `size` and `is empty` operations are valid.
+* Depending on your language, the queue may not be supported natively. You may simulate a queue using a list or deque (double-ended queue) as long as you use only a queue's standard operations.
+ 
+
+**Example 1:**
+
+**Input**<br>
+["MyStack", "push", "push", "top", "pop", "empty"]<br>
+[[], [1], [2], [], [], []]<br>
+**Output** <br>
+[null, null, null, 2, 2, false]<br>
+
+**Explanation** <br>
+MyStack myStack = new MyStack();<br>
+myStack.push(1);<br>
+myStack.push(2);<br>
+myStack.top(); // return 2<br>
+myStack.pop(); // return 2<br>
+myStack.empty(); // return False
+
+**Ideas:**
+We can implement stack operations using two queues, but here we use a single queue to implement a stack. The key operation is `pop`. The idea is to remove the first `size - 1` elements from the queue and reinsert them back into the queue. This way, the `size-th` element will be at the front of the queue, ready to be popped.
+
+```Java
+public class MyStack {
+    Queue<Integer> queue;
+
+    public MyStack(){
+        queue = new LinkedList<>();
+    }
+
+    public void push(int x) {
+        queue.add(x);
+    }
+
+    public int pop(){
+        rePosition();
+        return queue.poll();
+    }
+
+    public int top(){
+        rePosition();
+        int result = queue.poll();
+        queue.add(result);
+        return result;
+    }
+
+    public boolean empty(){
+        return queue.isEmpty();
+    }
+
+    public void rePosition(){
+        int size = queue.size();
+        size--;
+        while(size-- > 0){
+            queue.add(queue.poll());
+        }
     }
 }
 ```
