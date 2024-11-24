@@ -198,9 +198,48 @@ public class ValidParentheses {
 }
 ```
 
+## [1047. Remove All Adjacent Duplicates in String](https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string/description/)
 
+You are given a string `s` consisting of lowercase English letters. A duplicate removal consists of choosing two adjacent and equal letters and removing them.
 
+We repeatedly make **duplicate removals** on `s` until we no longer can.
 
+Return the final string after all such duplicate removals have been made. It can be proven that the answer is **unique**.
+
+ 
+
+**Example 1:**
+
+**Input:** s = "abbaca"<br>
+**Output:** "ca"<br>
+**Explanation:**<br> 
+For example, in "abbaca" we could remove "bb" since the letters are adjacent and equal, and this is the only possible move.  The result of this move is that the string is "aaca", of which only "aa" is possible, so the final string is "ca".
+
+**Ideas:**<br>
+In this problem, we can directly use a string to simulate stack operations, treating the end of the string as the stack's top. The stack is used to store the elements we traverse and to eliminate duplicate elements.
+
+```Java
+public class RemoveDuplicates {
+    public String removeDuplicates(String s){
+        ArrayDeque<Character> result = new ArrayDeque<>();
+        char ch;
+        for (int i = 0; i < s.length(); i++) {
+            ch = s.charAt(i);
+            if(result.isEmpty() || ch != result.peek()){
+                result.push(ch);
+            }
+            else{
+                result.pop();
+            }
+        }
+        String str = "";
+        while(!result.isEmpty()){
+            str = result.pop() + str;
+        }
+        return str;
+    }
+}
+```
 
 
 
