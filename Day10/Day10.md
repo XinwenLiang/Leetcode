@@ -150,6 +150,59 @@ public class MyStack {
     }
 }
 ```
+## [20. Valid Parentheses ](https://leetcode.com/problems/valid-parentheses/description/)
+
+Given a string `s` containing just the characters `'('`, `')'`, `'{'`, `'}'`, `'['` and `']'`, determine if the input string is valid.
+
+An input string is valid if:
+
+1. Open brackets must be closed by the same type of brackets.
+2. Open brackets must be closed in the correct order.
+3. Every close bracket has a corresponding open bracket of the same type.
+ 
+
+**Example 1:**
+
+**Input:** s = "()"
+
+**Output:** true
+
+**Idea:**<br>
+In this problem, our approach is as follows: when encountering a left parenthesis, we push it onto the stack; when encountering a right parenthesis, we check if it matches the top element of the stack. We only need to consider three scenarios:
+
+1. There are extra left parentheses.
+2. A right parenthesis does not match the top element of the stack.
+3. A right parenthesis is encountered when the stack is already empty.
+
+```Java
+public class ValidParentheses {
+    public boolean isValid(String s){
+        Deque<Character> deque = new LinkedList<>();
+        char ch;
+        for (int i = 0; i < s.length(); i++) {
+            ch = s.charAt(i);
+            if (ch == '('){
+                deque.push(')');
+            }else if(ch == '['){
+                deque.push(']');
+            }else if(ch == '{'){
+                deque.push('}');
+            }else if(deque.isEmpty() || deque.peek() != ch){
+                return false;
+            }else{ // If it's right parentheses, check if it can be matched with the top of stack.
+                deque.pop();
+            }
+        }
+        return deque.isEmpty();
+    }
+}
+```
+
+
+
+
+
+
 
 
 
