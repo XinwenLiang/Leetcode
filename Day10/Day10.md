@@ -31,7 +31,7 @@ myQueue.peek(); // return 1<br>
 myQueue.pop(); // return 1, queue is [2]<br>
 myQueue.empty(); // return false<br>
 
-**Ideas:** To simulate queue behavior using stacks, two stacks are needed: an input stack and an output stack. When pushing, simply push all elements onto the input stack. For popping, check whether the output stack is empty. If the output stack is empty, transfer all data from the input stack to the output stack and then pop one element at a time. If the output stack is not empty, directly pop data from the output stack. The detailed animation demonstration is as follows:(from https://github.com/XinwenLiang/leetcode-master/blob/master/problems/0232.%E7%94%A8%E6%A0%88%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97.md)
+**Ideas:** To simulate queue behavior using stacks, two stacks are needed: an input stack and an output stack. When pushing, simply push all elements onto the input stack. For popping, check whether the output stack is empty. If the output stack is empty, transfer all data from the input stack to the output stack and then pop one element at a time. If the output stack is not empty, directly pop data from the output stack. The detailed animation demonstration is as follows:(from (https://github.com/youngyangyang04/leetcode-master))
 
 ![232.用栈实现队列版本2](https://code-thinking.cdn.bcebos.com/gifs/232.用栈实现队列版本2.gif)
 
