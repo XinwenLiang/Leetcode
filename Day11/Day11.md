@@ -49,6 +49,88 @@ public class ReversePolishNotation {
 }
 ```
 
+## [239.Sliding Window Maximum](https://leetcode.com/problems/sliding-window-maximum/description/)
+
+You are given an array of integers `nums`, there is a sliding window of size `k` which is moving from the very left of the array to the very right. You can only see the `k` numbers in the window. Each time the sliding window moves right by one position.
+
+Return the max sliding window.
+
+ 
+
+**Example 1:**
+
+**Input:** nums = [1,3,-1,-3,5,3,6,7], k = 3<br>
+**Output:** [3,3,5,5,6,7]<br>
+**Explanation:** <br> 
+Window position                Max
+---------------               -----
+[1  3  -1] -3  5  3  6  7       3
+ 1 [3  -1  -3] 5  3  6  7       3
+ 1  3 [-1  -3  5] 3  6  7       5
+ 1  3  -1 [-3  5  3] 6  7       5
+ 1  3  -1  -3 [5  3  6] 7       6
+ 1  3  -1  -3  5 [3  6  7]      7
+
+ **Ideas:**<br>
+ This problem requires us to implement a custom monotonic stack that supports the functions `pop`, `push`, and `getMaxValue`.
+
+* `pop` function: If the element value removed from the window equals the element at the exit of the monotonic queue, the queue pops the element. Otherwise, no action is needed.
+* `push` function: If the element value to be pushed is greater than the value of the element at the entrance of the queue, the queue continues popping elements from the entrance until the value of the pushed element is less than or equal to the value of the element at the entrance.
+* `getMaxValue` function: Simply retrieve the top element of the stack each time.
+
+And here is the process(From https://github.com/youngyangyang04/leetcode-master)
+
+![239.滑动窗口最大值](https://code-thinking.cdn.bcebos.com/gifs/239.滑动窗口最大值.gif)
+
+```Java
+public class SlidingWindowMaximum {
+    public int[] maxSlidingWindow(int[] nums, int k){
+        if(nums.length == 1){
+            return nums;
+        }
+        int len = nums.length;
+        int[] result = new int[len-k+1];
+        int num = 0;
+        MyQueue que = new MyQueue();
+        // Put the first k elements into the queue.
+        for (int i = 0; i < k; i++) {
+            que.push(nums[i]);
+        }
+        // Add the max value of the first window to the result.
+        result[num++] = que.getMaxValue();
+
+        // Slide the window
+        for (int i = k; i < len; i++) {
+            que.pop(nums[i - k]);  // Remove the element going out of the window
+            que.push(nums[i]);    // Add the new element coming into the window
+            result[num++] = que.getMaxValue(); // Get the max value of the current window
+        }
+
+        return result;
+
+     }
+
+}
+class MyQueue{
+    Deque<Integer> deque = new LinkedList<>();
+    void pop(int val){
+        if(!deque.isEmpty() && val == deque.peek()){
+            deque.poll();
+        }
+    }
+
+    void push(int val){
+        while(!deque.isEmpty() && val > deque.getLast()){
+            deque.removeLast();
+        }
+        deque.add(val);
+    }
+    int getMaxValue(){
+        return deque.peek();
+    }
+}
+```
+
 
 
 
