@@ -105,11 +105,8 @@ public class SlidingWindowMaximum {
             que.push(nums[i]);    // Add the new element coming into the window
             result[num++] = que.getMaxValue(); // Get the max value of the current window
         }
-
         return result;
-
      }
-
 }
 class MyQueue{
     Deque<Integer> deque = new LinkedList<>();
