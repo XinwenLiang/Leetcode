@@ -66,6 +66,21 @@ In depth-first traversal, the terms "pre-order," "in-order," and "post-order" re
 ### Breadth-First Traversal
 **Level-order traversal:** Traverses the tree one level at a time. This is typically implemented iteratively.
 
+## Definition of Binary Tree
+
+```Java
+class TreeNode {
+    int val;        
+    TreeNode left;   // left node
+    TreeNode right;  // right node
+    TreeNode(int x) {
+        this.val = x;
+        this.left = null;
+        this.right = null;
+    }
+}
+```
+
 
 
 
