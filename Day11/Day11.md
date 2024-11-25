@@ -62,14 +62,14 @@ Return the max sliding window.
 **Input:** nums = [1,3,-1,-3,5,3,6,7], k = 3<br>
 **Output:** [3,3,5,5,6,7]<br>
 **Explanation:** <br> 
-Window position                Max
----------------               -----
-[1  3  -1] -3  5  3  6  7       3
- 1 [3  -1  -3] 5  3  6  7       3
- 1  3 [-1  -3  5] 3  6  7       5
- 1  3  -1 [-3  5  3] 6  7       5
- 1  3  -1  -3 [5  3  6] 7       6
- 1  3  -1  -3  5 [3  6  7]      7
+Window position                Max<br>
+---------------               -----<br>
+[1  3  -1] -3  5  3  6  7       3<br>
+ 1 [3  -1  -3] 5  3  6  7       3<br>
+ 1  3 [-1  -3  5] 3  6  7       5<br>
+ 1  3  -1 [-3  5  3] 6  7       5<br>
+ 1  3  -1  -3 [5  3  6] 7       6<br>
+ 1  3  -1  -3  5 [3  6  7]      7<br>
 
  **Ideas:**<br>
  This problem requires us to implement a custom monotonic stack that supports the functions `pop`, `push`, and `getMaxValue`.
