@@ -80,7 +80,7 @@ Window position                Max<br>
 
 And here is the process(From https://github.com/youngyangyang04/leetcode-master)
 
-![239.滑动窗口最大值](https://code-thinking.cdn.bcebos.com/gifs/239.滑动窗口最大值.gif)
+![239.滑动窗口最大值-2](https://code-thinking.cdn.bcebos.com/gifs/239.滑动窗口最大值-2.gif)
 
 ```Java
 public class SlidingWindowMaximum {
