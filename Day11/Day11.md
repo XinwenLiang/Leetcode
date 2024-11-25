@@ -128,7 +128,45 @@ class MyQueue{
 }
 ```
 
+## [347. Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/description/)
 
+Given an integer array `nums` and an integer `k`, return the `k` most frequent elements. You may return the answer in any order.
+
+**Example 1:**
+
+**Input:** nums = [1,1,1,2,2,3], k = 2<br>
+**Output:** [1,2]
+
+**Ideas:** <br>
+Since this problem requires comparing the frequency of elements, we consider using a map data structure to store information about the input array. The key represents the array elements, and the value represents their frequency. Then, we use a min-heap to traverse the elements in the map. This way, when we pop, the top element is removed, leaving the elements with higher frequencies in the heap. Finally, we can generate the required array in reverse order.
+
+```Java
+public class TopKElement {
+    public int[] topKFrequent(int[] nums, int k){
+        Map<Integer,Integer> map = new HashMap<>();
+        for(int num :nums){
+            map.put(num, map.getOrDefault(num,0) + 1);
+        }
+
+        PriorityQueue<int[]> pq = new PriorityQueue<>((pair1,pair2) -> pair1[1] -pair2[1]);
+        for(Map.Entry<Integer, Integer> entry : map.entrySet()){
+            if(pq.size() < k){
+                pq.add(new int[]{entry.getKey(), entry.getValue()});
+            }else{
+                if (entry.getValue() > pq.peek()[1]) {
+                    pq.poll(); // Pop the root node.
+                    pq.add(new int[]{entry.getKey(), entry.getValue()});
+                }
+            }
+        }
+        int[] result = new int[k];
+        for (int i = k-1; i >=0 ; i--) {
+            result[i] = pq.poll()[0];
+        }
+        return result;
+    }
+}
+```
 
 
 
