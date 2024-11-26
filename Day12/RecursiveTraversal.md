@@ -12,3 +12,19 @@ This happens when the termination condition is either missing or incorrectly wri
 
 3. Define the Logic for a Single Layer of Recursion<br>
 Determine the information that needs to be processed at each layer of recursion. At this step, the recursive function will be repeatedly called within itself to implement the recursion process.
+
+## [144. Binary Tree Preorder Traversal](https://leetcode.com/problems/binary-tree-preorder-traversal/description/)
+
+Given the `root` of a binary tree, return the preorder traversal of its nodes' values.
+
+**Example 1:**
+
+**Input:** root = [1,null,2,3]
+
+**Output:** [1,2,3]
+
+**Explanation:**
+
+![image](https://github.com/user-attachments/assets/fab128f1-a2fc-419f-ac35-3d9df0167eaa)
+
+
