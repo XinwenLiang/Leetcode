@@ -65,6 +65,64 @@ public class SymmetricTree {
 }
 ```
 
+## [104. Maximum Depth of Binary Tree](https://leetcode.com/problems/maximum-depth-of-binary-tree/description/)
+Given the `root` of a binary tree, return its maximum depth.
+
+A binary tree's **maximum depth** is the number of nodes along the longest path from the root node down to the farthest leaf node.
+
+**Example1**
+
+![image](https://github.com/user-attachments/assets/15e24f71-77e2-4c8b-8d9d-b70c1fcd8fcf)
+
+**Input:** root = [3,9,20,null,null,15,7]<br>
+**Output:** 3
+
+**Ideas:** In this problem, we can use a recursive traversal method. To calculate the height of a binary tree, we use postorder traversal, while for calculating the depth, we use preorder traversal. This problem requires finding the maximum depth of the binary tree, which is equivalent to finding its maximum height. Therefore, we use postorder traversal. Of course, preorder traversal is also an option, but during my first attempt, I chose postorder traversal.
+
+```Java
+public class MaximumDepth {
+    public int maxDepth(TreeNode root) {
+        if(root == null) return 0;
+        int leftHeight = maxDepth(root.left);
+        int rightHeight = maxDepth(root.right);
+        int height = 1+ Math.max(leftHeight, rightHeight);
+        return height;
+    }
+}
+```
+## [111. Minimum Depth of Binary Tree](https://leetcode.com/problems/minimum-depth-of-binary-tree/description/)
+Given a binary tree, find its minimum depth.
+
+The minimum depth is the number of nodes along the shortest path from the root node down to the nearest leaf node.
+
+**Note:** A leaf is a node with no children.
+
+**Example1**
+
+![image](https://github.com/user-attachments/assets/f8129056-f80e-46d3-86e2-f7308e395e07)
+
+**Input:** root = [3,9,20,null,null,15,7]<br>
+**Output:** 2
+
+**Ideas:** This problem is related to finding the minimum depth of a binary tree but is not entirely the same. During my first attempt, I chose to use postorder traversal for recursive processing.
+
+```Java
+public class MinimumDepth {
+    public int minDepth(TreeNode root) {
+        if (root == null) return 0;
+        int leftHeight = minDepth(root.left);
+        int rightHeight = minDepth(root.right);
+        if (root.left == null && root.right != null) {
+            return 1 + rightHeight;
+        } else if (root.left != null && root.right == null) {
+            return 1 + leftHeight;
+        } else {
+            return 1 + Math.min(leftHeight, rightHeight);
+        }
+    }
+}
+```
+
 
 
 
