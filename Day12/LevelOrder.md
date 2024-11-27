@@ -1,4 +1,16 @@
 # Binary Tree Level Order Traversal 
+## [102. Binary Tree Level Order Traversal](https://leetcode.com/problems/binary-tree-level-order-traversal/description)
+Given the `root` of a binary tree, return the level order traversal of its nodes' values. (i.e., from left to right, level by level).
+
+**Example1**
+
+![image](https://github.com/user-attachments/assets/4d40d2d7-6e2d-4675-806c-c7f6434dc2de)
+
+**Input:** root = [3,9,20,null,null,15,7] <br>
+**Output:** [[3],[9,20],[15,7]]
+
+
+
 **Ideas:** Binary Tree Level Order Traversal (equivalent to Breadth-First Search in graph theory).
 
 We use a queue to store the elements of each level during traversal and then record the length of
