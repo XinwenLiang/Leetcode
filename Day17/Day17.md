@@ -154,7 +154,7 @@ public class ValidateBinarySearchTree {
         if (!left) {
             return false;
         }
-        if (max != null && root.val < max.val) {
+        if (max != null && root.val <= max.val) {
             return false;
         }
         max = root;
