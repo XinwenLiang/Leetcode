@@ -102,13 +102,40 @@ public class FindMode {
 }
 ```
 
+## [236. Lowest Common Ancestor of a Binary Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/description/)
 
+Given a binary tree, find the lowest common ancestor (LCA) of two given nodes in the tree.
 
+According to the definition of LCA on Wikipedia: “The lowest common ancestor is defined between two nodes `p` and `q` as the lowest node in `T` that has both `p` and `q` as descendants 
+(where we allow a node to **be a descendant of itself**).”
 
+**Example1**
 
+![image](https://github.com/user-attachments/assets/77626a89-da93-4d14-a09f-2c8c6c2d5868)
 
+**Input:** root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 1<br>
+**Output:** 3<br>
+**Explanation:** The LCA of nodes 5 and 1 is 3.
 
+**Ideas:** This problem requires us to traverse from the bottom up in order to find the nearest common ancestor of the target element. Therefore, the backtracking process naturally 
+involves moving from the bottom up, and post-order traversal is needed. The following code accounts for the scenario where the target element itself is the common ancestor.
 
+```Java
+public class CommonAncestor {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if(root == null || root == p || root == q) return root;
+
+        TreeNode left = lowestCommonAncestor(root.left, p, q);
+        TreeNode right = lowestCommonAncestor(root.right, p, q);
+        if(left != null && right != null) return root;
+        if(left == null && right != null) return right;
+        if(left != null && right == null) return left;
+        else{
+            return null;
+        }
+    }
+}
+```
 
 
 
