@@ -14,8 +14,8 @@ The test cases are generated such that the number of unique combinations that su
 **Input:** candidates = [2,3,6,7], target = 7<br>
 **Output:** [[2,2,3],[7]]<br>
 **Explanation:**
-2 and 3 are candidates, and 2 + 2 + 3 = 7. Note that 2 can be used multiple times.
-7 is a candidate, and 7 = 7.
+2 and 3 are candidates, and 2 + 2 + 3 = 7. Note that 2 can be used multiple times.<br>
+7 is a candidate, and 7 = 7.<br>
 These are the only two combinations.
 
 **Ideas:**
@@ -30,10 +30,10 @@ starting point of the loop to prevent duplicate results.
 * If `sum > target`, return nothing.
 
 3. **Single-Layer Search Logic:**
-Use a single for loop starting from `startIndex` to search through the `candidates` collection. This ensures that each recursive call explores only the relevant portion of the collection, avoiding duplicate results.
+* Use a single for loop starting from `startIndex` to search through the `candidates` collection. This ensures that each recursive call explores only the relevant portion of the collection, avoiding duplicate results.
 
 4. **Trim Operation**
-We should sort the candidates firstly, and then in the for loop, if `sum > target`, break the loop.
+* We should sort the candidates firstly, and then in the for loop, if `sum > target`, break the loop.
 
 ```Java
 
