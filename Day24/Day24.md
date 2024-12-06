@@ -85,10 +85,98 @@ public boolean isValid(String s, int start, int end) {
 }
 ```
 
-## []()
+## [78. Subsets](https://leetcode.com/problems/subsets/description/)
 
+Given an integer array `nums` of **unique** elements, return all possible subsets(the power set).
 
+The solution set **must not** contain duplicate subsets. Return the solution in **any order**.
 
+**Example 1:**
+
+**Input:** nums = [1,2,3]<br>
+**Output:** [[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]
+
+**Ideas:**<br>
+1. **Determining the Type and Parameters of the Recursive Function**:
+* Define two global variables:A 2D array result to store the collection of results and an array path to store individual results that meet the conditions.
+* The function type is void, as it does not return any value.
+* For parameters, we pass in the target and candidate arrays from the problem statement.The startIndex is used to control the starting point of the loop to prevent duplicate results.
+
+2. **Determine the Termination Conditions:**
+* If `startIndex >= nums.size()`, the loop ends.
+
+3. **Single-Layer Search Logic:**
+* Use a single for loop starting from `startIndex` to search through the `nums`. Different from combinations and partition problems, cartesian products need to search for every nodes.
+
+```Java
+public class Subset {
+    List<List<Integer>> result = new ArrayList<>();
+    LinkedList<Integer> path = new LinkedList<>();
+
+    public List<List<Integer>> subsets(int[] nums) {
+        backtracking(nums, 0);
+        return result;
+    }
+
+    public void backtracking(int[] nums, int startIndex) {
+        result.add(new ArrayList<>(path));
+        if (startIndex >= nums.length) return;
+        for (int i = startIndex; i < nums.length; i++) {
+            path.add(nums[i]);
+            backtracking(nums, i + 1);
+            path.removeLast();
+        }
+    }
+}
+```
+
+## [90. Subsets II](https://leetcode.com/problems/subsets-ii/description/)
+
+Given an integer array `nums` that may contain duplicates, return all possible subsets (the power set).
+
+The solution set **must not** contain duplicate subsets. Return the solution in **any order**.
+
+**Example 1:**
+
+**Input:** nums = [1,2,2] <br>
+**Output:** [[],[1],[1,2],[1,2,2],[2],[2,2]]
+
+**Ideas:** <br>
+This problem requires deduplication on the same tree level, but not on the same tree branch. Therefore, we need to use a boolean array `used` to record the numbers that have already been used.
+
+```Java
+public class SubsetsII {
+    List<List<Integer>> result = new ArrayList<>();
+    LinkedList<Integer> path = new LinkedList<>();
+    boolean[] used;
+    public List<List<Integer>> subsetsWithDup(int[] nums){
+        if (nums.length == 0){
+            result.add(path);
+            return result;
+        }
+        Arrays.sort(nums);
+        used = new boolean[nums.length];
+        backtracking(nums, 0);
+        return result;
+    }
+    public void backtracking(int[] nums, int startIndex){
+        result.add(new ArrayList<>(path));
+        if (startIndex >= nums.length){
+            return;
+        }
+        for (int i = startIndex; i < nums.length; i++) {
+            if (i > 0 && nums[i] == nums[i - 1] && !used[i-1]) {
+                continue;
+            }
+            path.add(nums[i]);
+            used[i] = true;
+            backtracking(nums, i+1);
+            path.removeLast();
+            used[i] = false;
+        }
+    }
+}
+```
 
 
 
