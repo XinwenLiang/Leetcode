@@ -63,9 +63,83 @@ public class CombinationSum {
 }
 ```
 
+## [40. Combinations Sum II](https://leetcode.com/problems/combination-sum-ii/description/)
 
+Given a collection of candidate numbers (`candidates`) and a target number (`target`), find all unique combinations in `candidates` where the candidate numbers sum to `target`.
 
+Each number in `candidates` may only be used **once** in the combination.
 
+**Note:** The solution set must not contain duplicate combinations.
+
+**Example 1:**
+
+**Input:** candidates = [10,1,2,7,6,1,5], target = 8
+**Output:** 
+[<br>
+[1,1,6],<br>
+[1,2,5],<br>
+[1,7],<br>
+[2,6]<br>
+]
+
+**Ideas:**
+1. **Determining the Type and Parameters of the Recursive Function**:
+* Define two global variables:A 2D array result to store the collection of results and an array path to store individual results that meet the conditions.
+* The function type is void, as it does not return any value.
+* For parameters, we pass in the target and candidate arrays from the problem statement. The sum parameter is used to calculate the total of the individual result stored in path, and startIndex is used to control the
+starting point of the loop to prevent duplicate results. (Boolean type variable used to remove duplications, we can also use startIndex directly).
+
+2. **Determine the Termination Conditions:**
+* If `target == sum`, it means the target result has been found. Add the current path to the result.
+* If `sum > target`, return nothing.
+
+3. **Single-Layer Search Logic:**
+The goal is to eliminate duplicates "used on the same level of the tree". How can we determine if an element (of the same value) has already been used on the same level of the tree?
+
+If `candidates[i] == candidates[i - 1]` and `used[i - 1] == false`, it indicates that the previous branch has used `candidates[i - 1]`, meaning `candidates[i - 1]` has been used on the same level of the tree.
+
+At this point, the `for loop` should execute a continue operation. When `candidates[i] == candidates[i - 1]`, the scenarios are as follows:
+
+If `used[i - 1] == true`, it means `candidates[i - 1]` has been used on the same branch.
+If `used[i - 1] == false`, it means `candidates[i - 1]` has been used on the same level of the tree.
+
+```Java
+public class CombinationSumII {
+    List<List<Integer>> res = new ArrayList<>();
+    LinkedList<Integer> path = new LinkedList<>();
+    boolean[] used;
+
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        used = new boolean[candidates.length];
+        Arrays.sort(candidates); // Sort the arrays for the convenience of trimming.
+        backtracking(candidates, target, 0, 0);
+        return res;
+    }
+
+    public void backtracking(int[] candidates, int target, int sum, int startIndex) {
+        if (sum == target) {
+            res.add(new ArrayList<>(path));
+            return;
+        }
+        for (int i = startIndex; i < candidates.length; i++) {
+            if (sum + candidates[i] > target) break;
+            if (i > 0 && candidates[i] == candidates[i - 1] && !used[i - 1]) {
+                continue;
+            }
+            // Mark the current element as used and add to path.
+            used[i] = true;
+            path.add(candidates[i]);
+            sum += candidates[i];
+            backtracking(candidates, target, sum, i + 1);
+
+            // backtrack: undo changes
+            path.removeLast();
+            used[i] = false;
+            sum -= candidates[i];
+        }
+    }
+}
+```
 
 
 
