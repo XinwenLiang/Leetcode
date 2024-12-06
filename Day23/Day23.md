@@ -100,8 +100,8 @@ If `candidates[i] == candidates[i - 1]` and `used[i - 1] == false`, it indicates
 
 At this point, the `for loop` should execute a continue operation. When `candidates[i] == candidates[i - 1]`, the scenarios are as follows:
 
-If `used[i - 1] == true`, it means `candidates[i - 1]` has been used on the same branch.
-If `used[i - 1] == false`, it means `candidates[i - 1]` has been used on the same level of the tree.
+* If `used[i - 1] == true`, it means `candidates[i - 1]` has been used on the same branch.
+* If `used[i - 1] == false`, it means `candidates[i - 1]` has been used on the same level of the tree.
 
 ```Java
 public class CombinationSumII {
