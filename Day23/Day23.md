@@ -93,7 +93,7 @@ starting point of the loop to prevent duplicate results. (Boolean type variable 
 * If `target == sum`, it means the target result has been found. Add the current path to the result.
 * If `sum > target`, return nothing.
 
-3. **Single-Layer Search Logic:**
+3. **Single-Layer Search Logic:** <br>
 The goal is to eliminate duplicates "used on the same level of the tree". How can we determine if an element (of the same value) has already been used on the same level of the tree?
 
 If `candidates[i] == candidates[i - 1]` and `used[i - 1] == false`, it indicates that the previous branch has used `candidates[i - 1]`, meaning `candidates[i - 1]` has been used on the same level of the tree.
@@ -141,11 +141,61 @@ public class CombinationSumII {
 }
 ```
 
+## [131. Palindrome Partitioning](https://leetcode.com/problems/palindrome-partitioning/description/)
 
+Given a string `s`, partition `s` such that every substring of the partition is a palindrome. Return all possible palindrome partitioning of `s`.
 
+**Example 1:**
 
+**Input:** s = "aab" <br>
+**Output:** [["a","a","b"],["aa","b"]]
 
+**Ideas:** 
+1. **Determining the Type and Parameters of the Recursive Function**:
+* Define two global variables:A 2D array result to store the collection of results and an array path to store individual results that meet the conditions.
+* The function type is void, as it does not return any value.
+* For parameters, we pass in the target and candidate arrays from the problem statement. The `startIndex` is used to control the starting point of the loop to prevent duplicate results. Actually, `startIndex` represents the dividing line.
+2. **Determine the Termination Conditions:**
+* If `startIndex >= s.size()`, then we find a partition case.
+3. **Single-Layer Search Logic:** <br>
+* In the loop `for (int i = startIndex; i < s.size(); i++)`, we define the starting position `startIndex`. Thus, `[startIndex, i]` represents the substring to be extracted.
+First, we check whether this substring is a palindrome. If it is, we add it to the `path`, which is used to record the palindromic substrings obtained from the partition.
+3. **Determine a palindrome partitioning:**
+* We can use Two-Pointer method to check if the substring is a palindrome.
 
+```Java
+public class Palindrome {
+    List<List<String>> res = new ArrayList<>();
+    List<String> path = new ArrayList<>();
+
+    public List<List<String>> partition(String s) {
+        backtracking(s,0,new StringBuilder());
+        return res;
+    }
+    public void backtracking(String s, int startIndex, StringBuilder sb){
+        if (startIndex == s.length()){
+            res.add(new ArrayList<>(path));
+            return;
+        }
+        for (int i = startIndex; i <s.length() ; i++) {
+            sb.append(s.charAt(i));
+            if(isPalindrome(sb)){
+                path.add(sb.toString());
+                backtracking(s,i+1,new StringBuilder());
+                path.remove(path.size() - 1);
+            }
+        }
+    }
+    public boolean isPalindrome(StringBuilder sb){
+        for (int i = 0; i < sb.length()/2; i++) {
+            if(sb.charAt(i) != sb.charAt(sb.length()-i-1)){
+                return false;
+            }
+        }
+        return true;
+    }
+}
+```
 
 
 
