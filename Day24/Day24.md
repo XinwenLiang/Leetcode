@@ -62,7 +62,8 @@ public class ValidIP {
         }
     }
 
-    public boolean isValid(String s, int start, int end) {
+//Check if the substring is valid.
+public boolean isValid(String s, int start, int end) {
         if (start > end) {
             return false;
         }
@@ -84,7 +85,7 @@ public class ValidIP {
 }
 ```
 
-
+## []()
 
 
 
