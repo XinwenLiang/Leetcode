@@ -73,7 +73,7 @@ Each number in `candidates` may only be used **once** in the combination.
 
 **Example 1:**
 
-**Input:** candidates = [10,1,2,7,6,1,5], target = 8
+**Input:** candidates = [10,1,2,7,6,1,5], target = 8 <br>
 **Output:** 
 [<br>
 [1,1,6],<br>
