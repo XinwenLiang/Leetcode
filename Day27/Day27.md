@@ -40,26 +40,88 @@ public class AssignCookies {
 ```
 
 ## [376. Wiggle Subsequence](https://leetcode.com/problems/wiggle-subsequence/description/)
-A wiggle sequence is a sequence where the differences between successive numbers strictly alternate between positive and negative. The first difference (if one exists) may be either positive or negative. A sequence 
-with one element and a sequence with two non-equal elements are trivially wiggle sequences.
+A **wiggle sequence** is a sequence where the differences between successive numbers strictly alternate between positive and negative. The first difference (if one exists) may be either positive or negative. A 
+sequence with one element and a sequence with two non-equal elements are trivially wiggle sequences.
 
-For example, [1, 7, 4, 9, 2, 5] is a wiggle sequence because the differences (6, -3, 5, -7, 3) alternate between positive and negative.
-In contrast, [1, 4, 7, 2, 5] and [1, 7, 4, 5, 5] are not wiggle sequences. The first is not because its first two differences are positive, and the second is not because its last difference is zero.
-A subsequence is obtained by deleting some elements (possibly zero) from the original sequence, leaving the remaining elements in their original order.
+* For example, `[1, 7, 4, 9, 2, 5]` is a **wiggle sequence** because the differences `(6, -3, 5, -7, 3)` alternate between positive and negative.
+* In contrast, `[1, 4, 7, 2, 5]` and `[1, 7, 4, 5, 5]` are not wiggle sequences. The first is not because its first two differences are positive, and the second is not because its last difference is zero.
+A **subsequence** is obtained by deleting some elements (possibly zero) from the original sequence, leaving the remaining elements in their original order.
 
-Given an integer array nums, return the length of the longest wiggle subsequence of nums.
+Given an integer array `nums`, return the length of the longest **wiggle subsequence** of `nums`.
 
- 
+**Example 1:**
 
-Example 1:
+**Input:** nums = [1,7,4,9,2,5] <br>
+**Output:** 6 <br>
+**Explanation:** The entire sequence is a wiggle sequence with differences (6, -3, 5, -7, 3).
 
-Input: nums = [1,7,4,9,2,5]
-Output: 6
-Explanation: The entire sequence is a wiggle sequence with differences (6, -3, 5, -7, 3).
+**Ideas:** <br>
+In this problem, we need to consider three cases:
+* There are flat slopes within the upslope or downslope.
+  like `[1,2,2,2,1]` , we can delete the left or the right two 2's.
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/aa3e5b5c-d5a7-4e10-89e1-50a5cc8cd26c" alt="图片3" width="600">
+</p>
 
+Therefore, the condition of recording the peeks is `(prediff >= 0 && curdiff < 0) || (prediff <= 0 && curdiff > 0)`.
 
+* Flat slopes exist at the start or end of the array.
+If the length of the array is 2, we can assume there exists a wiggle at the end by `count = 1`, and extend the start part by `prediff = 0`.
 
+* Monotonic slopes contain flat sections.
+like `[1,2,2,2,3,4]`, we can update `prediff` at a wiggle by `prediff = curdiff` in the end of `if` condition.
+
+```Java
+public class WiggleSequence {
+    public int wiggleMaxLength(int[] nums) {
+        int count = 1;
+        int preDiff = 0;
+        int curDiff;
+        if(nums.length == 1) return 1;
+        for (int i = 0; i < nums.length -1; i++) {
+            curDiff = nums[i+1] - nums[i];
+            if((preDiff >= 0 && curDiff < 0) || (preDiff <= 0 && curDiff > 0)){
+                count++;
+                preDiff = curDiff;
+            }
+        }
+        return count;
+    }
+}
+```
+
+## [53. Maximum Subarray](https://leetcode.com/problems/maximum-subarray/description/)
+Given an integer array `nums`, find the subarray with the largest sum, and return its sum.
+
+**Example 1:**
+
+**Input:** nums = [-2,1,-3,4,-1,2,1,-5,4] <br>
+**Output:** 6 <br>
+**Explanation:** The subarray [4,-1,2,1] has the largest sum 6.
+
+**Ideas:**
+The greedy idea is if the sum of sequence we meet is negative, we abandon this part and start with the next number.
+
+```Java
+public class MaximumSequence {
+    public int maxSubArray(int[] nums) {
+        if(nums.length == 1) {
+            return nums[0];
+        }
+        int sum = 0;
+        int count = Integer.MIN_VALUE;
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
+           count = Math.max(sum, count);
+           if(sum <= 0){
+               sum = 0;
+           }
+        }
+        return count;
+    }
+}
+```
 
 
 
