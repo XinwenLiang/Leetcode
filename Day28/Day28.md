@@ -103,9 +103,50 @@ public class JumpGameII {
 }
 ```
 
+## [1005. Maximize Sum of Array After K Negations](https://leetcode.com/problems/maximize-sum-of-array-after-k-negations/description/）
 
+Given an integer array `nums` and an integer `k`, modify the array in the following way:
 
+* choose an index `i` and replace `nums[i]` with `-nums[i]`.
+You should apply this process exactly `k` times. You may choose the same index `i` multiple times.
 
+Return *the largest possible sum of the array after modifying it in this way*.
+
+**Example 1:**
+
+**Input:** nums = [4,2,3], k = 1 <br>
+**Output:** 5 <br>
+**Explanation:** Choose index 1 and nums becomes [4,-2,3].
+
+**Ideas:** This problem employs a two-step greedy approach:
+1. First, prioritize finding the negative number with the largest absolute value and flip its sign.
+2. If `k` is even, no further processing is needed.
+3. If `k` is odd, it means we need to select the smallest positive number and flip its sign.
+
+```Java
+public class KNegations {
+    public int largestSumAfterKNegations(int[] nums, int k) {
+        Arrays.sort(nums);
+        // Negate the negative number first.
+        for (int i = 0; i < nums.length; i++) {
+            if(nums[i] < 0 && k > 0){
+                nums[i] *= -1;
+                k--;
+            }
+        }
+       // If there exists k remained, negate the minimal positive number.
+        if(k % 2 == 1){
+            Arrays.sort(nums);
+          nums[0] = - nums[0];
+                }
+        int result = 0;
+        for(int i: nums){
+            result += i;
+        }
+        return result;
+    }
+}
+```
 
 
 
