@@ -1,5 +1,5 @@
 # 代码随想录算法训练营
-## [134. Gas Station](https://leetcode.com/problems/gas-station/description/）
+## [134. Gas Station](https://leetcode.com/problems/gas-station/description/)
 
 There are `n` gas stations along a circular route, where the amount of gas at the `ith` station is `gas[i]`.
 
