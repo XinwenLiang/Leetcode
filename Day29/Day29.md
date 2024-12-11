@@ -91,11 +91,62 @@ public class Candy {
 }
 ```
 
+## [860. Lemonade Change](https://leetcode.com/problems/lemonade-change/description/)
 
+At a lemonade stand, each lemonade costs `$5`. Customers are standing in a queue to buy from you and order one at a time (in the order specified by bills). Each customer will only buy one lemonade and pay with either a `$5`, `$10`, or `$20` bill. You must provide the correct change to each customer so that the net transaction is that the customer pays `$5`.
 
+Note that you do not have any change in hand at first.
 
+Given an integer array `bills` where `bills[i]` is the bill the `ith` customer pays, return `true` if you can provide every customer with the correct change, or `false` otherwise.
 
+**Example 1:**
 
+**Input:** bills = [5,5,5,10,20] <br>
+**Output:** true <br>
+**Explanation:** <br> 
+From the first 3 customers, we collect three $5 bills in order. <br>
+From the fourth customer, we collect a $10 bill and give back a $5.<br>
+From the fifth customer, we give a $10 bill and a $5 bill.<br>
+Since all customers got correct change, we output true.<br>
+
+**Ideas:** <br>
+There are three cases:
+* $5: No need to change.
+* $10: change `$5`
+* $20: Two methods: Greedy methods: prefer `$10 + $5` to 3 `$5'`s.
+
+```Java
+public class LemonadeChange {
+    public boolean lemonadeChange(int[] bills) {
+        int five = 0;
+        int ten = 0;
+        int twenty = 0;
+        for (int bill : bills) {
+            if (bill == 5) five++;
+            if (bill == 10) {
+                if (five == 0) return false;
+                else {
+                    ten++;
+                    five--;
+                }
+            }
+            if (bill == 20) {
+                if (ten > 0 && five > 0) {
+                    ten--;
+                    five--;
+                    twenty++;
+                } else if (five >= 3) {
+                    five -= 3;
+                    twenty++;
+                } else {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+}
+```
 
 
 
