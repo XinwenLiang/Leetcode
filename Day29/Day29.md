@@ -45,7 +45,51 @@ public class GasStation {
 }
 ```
 
+## [135. Candy](https://leetcode.com/problems/candy/description/)
 
+There are `n` children standing in a line. Each child is assigned a rating value given in the integer array `ratings`.
+
+You are giving candies to these children subjected to the following requirements:
+* Each child must have at least one candy.
+* Children with a higher rating get more candies than their neighbors.
+Return *the minimum number of candies you need to have to distribute the candies to the children*.
+
+**Example 1:**
+
+**Input:** ratings = [1,0,2] <br>
+**Output:** 5 <br>
+**Explanation:** You can allocate to the first, second and third child with 2, 1, 2 candies respectively.
+
+**Ideas:** For this problem, we had better consiter two sides separately, which can make the problem become easier. If we join the two sides' logic together, we can easily be confused.
+* If the right child did better than the left one: `if (ratings[i] > ratings[i-1])`, add one more candy to the right child:`Candy[i] = Candy[i-1] + 1`
+* If the left child did better than the right one: `if (ratings[i] > ratings[i+1]`, add one more candy to the left child and compare it with the first case: `Candy[i] = Math.max(Candy[i+1]+1, Candy[i])`
+
+```Java
+public class Candy {
+    public int candy(int[] ratings) {
+        int len = ratings.length;
+        int[] Candy = new int[len];
+        Candy[0] = 1;
+        for (int i = 1; i < len; i++) {
+            if(ratings[i] > ratings[i-1]){
+                Candy[i] = Candy[i-1] + 1;
+            }else{
+                Candy[i] = 1;
+            }
+        }
+        for (int i = len - 2; i >= 0 ; i--) {
+            if(ratings[i] > ratings[i+1]){
+                Candy[i] = Math.max(Candy[i+1] + 1, Candy[i]);
+            }
+        }
+        int result = 0;
+        for (int i = 0; i < len; i++) {
+            result += Candy[i];
+        }
+        return result;
+    }
+}
+```
 
 
 
