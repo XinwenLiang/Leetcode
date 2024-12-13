@@ -36,12 +36,81 @@ public class MinimumArrows {
     }
 ```
 
+## [435. Non-Overlapping-Intervals](https://leetcode.com/problems/non-overlapping-intervals/description/)
 
+Given an array of intervals `intervals` where `intervals[i] = [starti, endi]`, return *the minimum number of intervals you need to remove to make the rest of the intervals non-overlapping*.
 
+**Note** that intervals which only touch at a point are **non-overlapping**. For example, `[1, 2]` and `[2, 3]` are non-overlapping.
 
+**Example 1:**
 
+**Input:** intervals = [[1,2],[2,3],[3,4],[1,3]] <br>
+**Output:** 1 <br>
+**Explanation:** [1,3] can be removed and the rest of the intervals are non-overlapping.
 
+**Ideas:** We first sort the intervals by their left boundaries. The logic for checking overlap is `nums[i][0] < nums[i-1][1]`. To determine if the next interval overlaps, we need to update the value of `nums[i][1]` 
+by taking the minimum of the right boundaries of the two intervals: `nums[i][1] = Math.min(nums[i-1][1], nums[i][1])`.
 
+```Java
+public class EraseOverlapIntervals {
+    public int eraseOverlapIntervals(int[][] intervals) {
+        Arrays.sort(intervals, (a,b) ->{
+            return Integer.compare(a[0],b[0]);
+        });
+        int count = 0;
+        for (int i = 1; i < intervals.length; i++) {
+            if(intervals[i][0] < intervals[i-1][1]){
+                count++;
+                intervals[i][1] = Math.min(intervals[i-1][1], intervals[i][1]);
+            }
+        }
+        return count;
+    }
+}
+```
+
+## [763. Partition Labels](https://leetcode.com/problems/partition-labels/description/)
+
+You are given a string `s`. We want to partition the string into as many parts as possible so that each letter appears in at most one part.
+
+Note that the partition is done so that after concatenating all the parts in order, the resultant string should be `s`.
+
+Return *a list of integers representing the size of these parts*.
+
+**Example 1:**
+
+**Input:** s = "ababcbacadefegdehijhklij" <br>
+**Output:** [9,7,8] <br>
+**Explanation:** 
+The partition is "ababcbaca", "defegde", "hijhklij". <br>
+This is a partition so that each letter appears in at most one part.<br>
+A partition like "ababcbacadefegde", "hijhklij" is incorrect, because it splits s into less parts.
+
+**Ideas:** We first need to record the furthest position where each letter appears. Then, we iterate through each letter one by one and update the furthest occurrence index of the character. If 
+the furthest occurrence index of a character matches the current index, we have found a partition point.
+
+```Java
+public class PartitionLabels {
+    public List<Integer> partitionLabels(String s) {
+        List<Integer> res = new ArrayList<>();
+        int[] edge = new int[26];
+        char[] chars = s.toCharArray();
+        for (int i = 0; i < chars.length; i++) {
+            edge[chars[i] - 'a'] = i;
+        }
+        int left = 0;
+        int right = 0;
+        for (int i = 0; i < s.length(); i++) {
+            right = Math.max(right, edge[chars[i] -'a']);
+            if(i == right){
+                res.add(right - left +1);
+                left  = i+1;
+            }
+        }
+        return res;
+    }
+}
+```
 
 
 
