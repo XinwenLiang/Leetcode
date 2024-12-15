@@ -43,10 +43,46 @@ public class FibonacciNumber {
 }
 ```
 
+## [70. Climb Stairs](https://leetcode.com/problems/climbing-stairs/description/)
 
+You are climbing a staircase. It takes `n` steps to reach the top.
 
+Each time you can either climb `1` or `2` steps. In how many distinct ways can you climb to the top?
 
+**Example 1:**
 
+**Input:** n = 2
+**Output:** 2
+**Explanation:** There are two ways to climb to the top. <br>
+1. 1 step + 1 step
+2. 2 steps
+
+**Ideas:**
+1. Define the dp Array and Its Index Meaning
+  The definition of `dp[i]` is: There are dp[i] methods to reach the top.
+2. Determine the Recurrence Relation (State Transition Equation)
+   The state transition equation is: dp[i] = dp[i-1] + dp[i-2]
+3. Initialize the dp Array
+   dp[0] = 1, dp[1] = 1, dp[2] = 2
+4. Determine the Traversal Order
+   From the recurrence relation dp[i] = dp[i-1] + dp[i-2], it is clear that dp[i] depends on dp[i-1] and dp[i-2]. Therefore, the traversal order must be from front to back (i.e., increasing order of i.)
+5. Derive the dp Array with an Example
+   Using the recurrence formula dp[i] = dp[i-1] + dp[i-2], let us derive the dp array when 𝑁 = 10. The dp array should look like this:[1,1,2,3,5,8,13,21,34,55,89]
+
+```Java
+public class ClimbStairs {
+    public int climbStairs(int n){
+        int[] dp = new int[n +2];
+        dp[0] = 1;
+        dp[1] = 1;
+        dp[2] = 2;
+        for (int i = 3; i < n+1; i++) {
+            dp[i] = dp[i-1] + dp[i-2];
+        }
+        return dp[n];
+    }
+}
+```
 
 
 
