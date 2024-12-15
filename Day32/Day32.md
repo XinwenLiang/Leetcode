@@ -53,7 +53,7 @@ Each time you can either climb `1` or `2` steps. In how many distinct ways can y
 
 **Input:** n = 2 <br>
 **Output:** 2<br>
-**Explanation:** There are two ways to climb to the top. <br>
+**Explanation:** There are two ways to climb to the top.
 1. 1 step + 1 step
 2. 2 steps
 
