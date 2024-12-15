@@ -76,11 +76,63 @@ public class IncreasingNumber {
 }
 ```
 
+## [968. Binary Tree Cameras](https://leetcode.com/problems/binary-tree-cameras/description/)
 
+You are given the `root` of a binary tree. We install cameras on the tree nodes where each camera at a node can monitor its parent, itself, and its immediate children.
 
+Return *the minimum number of cameras needed to monitor all nodes of the tree*.
 
+**Example1:**
 
+![image](https://github.com/user-attachments/assets/f884be6f-b587-460a-9314-8d74a82a360e)
 
+**Input:** root = [0,0,null,0,0] <br>
+**Output:** 1 <br>
+**Explanation:** One camera is enough to monitor all nodes if placed as shown.
+
+**Ideas:**
+
+To maximize monitoring coverage, it is best to place cameras on the parent nodes of leaf nodes. The traversal order for the binary tree must be postorder, as this allows us to determine the state of a parent node 
+based on the states of its left and right child nodes.
+
+* Node States:
+1. No Coverage: The node is not covered by any camera.(0)
+2. Has Camera: The node has a camera installed.(1)
+3. Covered: The node is covered by a camera (either from itself or its children).(2)
+**Note:** Empty nodes should be assigned the Covered state by default.
+* Four Scenarios:
+1. Case 1: Both left and right children are covered. In this case, the parent node is in a No Coverage state. 
+2. Case 2: At least one of the left or right children is in a No Coverage state. In this case, the parent node must have a camera installed.
+3. Case 3: At least one of the left or right children is covered. In this case, the parent node is in a Covered state.
+4. Case 4: After traversing the entire tree, if the root node is in a No Coverage state, an additional camera must be installed at the root.
+
+```Java
+public class BinaryTreeCameras {
+    int result = 0;
+    public int minCameraCover(TreeNode root) {
+        // Case4: When the root has no cover, we need to set a camera.
+        if(traversal(root) == 0){
+            result ++;
+        }
+        return result;
+    }
+    public int traversal(TreeNode cur){
+        if(cur == null) return 2;
+        int left = traversal(cur.left);
+        int right = traversal(cur.right);
+        // Case1:Both the left and right child have the cover.
+        if(left == 2 && right == 2) return 0;
+        // Case2: The left and right child have at least one no-cover.
+        if(left == 0 || right == 0){
+            result++;
+            return 1;
+        }
+        // Case3: The left and right child have at least one cover.
+        if(left == 1 || right == 1) return 2;
+        return -1;
+    }
+}
+```
 
 
 
