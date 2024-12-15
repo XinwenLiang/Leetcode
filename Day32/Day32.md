@@ -22,14 +22,26 @@ of the recursive calculations.
 2. Determine the Recurrence Relation (State Transition Equation)
    The state transition equation is: dp[i] = dp[i-1] + dp[i-2]
 3. Initialize the dp Array
-   dp[0] = 1, dp[1] = 1
+   dp[0] = 0, dp[1] = 1
 4. Determine the Traversal Order
    From the recurrence relation dp[i] = dp[i-1] + dp[i-2], it is clear that dp[i] depends on dp[i-1] and dp[i-2]. Therefore, the traversal order must be from front to back (i.e., increasing order of i.)
 5. Derive the dp Array with an Example
    Using the recurrence formula dp[i] = dp[i-1] + dp[i-2], let us derive the dp array when 𝑁 = 10. The dp array should look like this:[0,1,1,2,3,5,8,13,21,34,55]
 
 ```Java
-
+public class FibonacciNumber {
+    public int fib(int n){
+        if(n <= 1) return n;
+        int[] dp = new int[n+1];
+        dp[0] = 0;
+        dp[1] = 1;
+        for (int i = 2; i < dp.length; i++) {
+            dp[i] = dp[i-1] + dp[i-2];
+        }
+        return dp[n];
+    }
+}
+```
 
 
 
