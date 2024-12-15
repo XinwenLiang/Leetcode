@@ -84,12 +84,48 @@ public class ClimbStairs {
 }
 ```
 
+## [746. Min Cost Climbing Stairs](https://leetcode.com/problems/min-cost-climbing-stairs/description/)
+ 
+You are given an integer array `cost` where `cost[i]` is the cost of `ith` step on a staircase. Once you pay the cost, you can either climb one or two steps.
 
+You can either start from the step with index `0`, or the step with index `1`.
 
+Return *the minimum cost to reach the top of the floor*.
 
+**Example 1:**
 
+**Input:** cost = [10,15,20] <br>
+**Output:** 15 <br>
+**Explanation:** You will start at index 1. <br>
+- Pay 15 and climb two steps to reach the top.<br>
+The total cost is 15.
 
+**Ideas:**
+1. Define the dp Array and Its Index Meaning
+  The definition of `dp[i]` is: The minimal cost of reaching index `i`.
+2. Determine the Recurrence Relation (State Transition Equation)
+   The state transition equation is: dp[i] = Math.min(dp[i-1] + cost[i-1], dp[i-2] + cost[i-2])
+3. Initialize the dp Array
+   dp[0] = 0, dp[1] = 0
+4. Determine the Traversal Order
+  The traversal order must be from front to back (i.e., increasing order of i.)
+5. Derive the dp Array with an Example
+   If cost = [1, 100, 1, 1, 1, 100, 1, 1, 100, 1], dp = [0,0,1,2,2,3,3,4,4,5,6]
 
+```Java
+public class MinimalStairs {
+    public int minCostClimbingStairs(int[] cost) {
+        int n = cost.length;
+        int[] dp = new int[n + 1];
+        dp[0] = 0;
+        dp[1] = 0;
+        for (int i = 2; i < dp.length; i++) {
+            dp[i] = Math.min(dp[i - 1] + cost[i - 1], dp[i - 2] + cost[i - 2]);
+        }
+        return dp[n];
+    }
+}
+```
 
 
 
