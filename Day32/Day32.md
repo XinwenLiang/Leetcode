@@ -13,7 +13,7 @@ Given `n`, calculate `F(n)`.
 **Output:** 1 <br>
 **Explanation:** F(2) = F(1) + F(0) = 1 + 0 = 1.
 
-**Ideas:**  <b>
+**Ideas:** 
 This problem can be solved using recursion, but to practice dynamic programming, we will solve it following the five-step dynamic programming approach. Here, we will use a one-dimensional dp array to store the results 
 of the recursive calculations.
 
