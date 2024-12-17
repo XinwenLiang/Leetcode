@@ -68,7 +68,7 @@ items to include in the backpack such that the total value of the selected items
 * Placing item i: The value is dp[j-weight[i]] + value[i].
 2. Determine the Recurrence Relation (State Transition Equation)
   Since we want to maximize the total value of the backpack within its capacity, we take the maximum of the two cases. The recurrence relation is:
-  `dp[i][j] = Math.max(dp[j], dp[j-weight[i]] + value[i])`
+  `dp[j] = Math.max(dp[j], dp[j-weight[i]] + value[i])`
 4. Initialize the dp Array
    dp[j] = 0, when the capacity of bag is 0, the maximal value of this bag is 0 too.
 5. Determine the Traversal Order
@@ -105,9 +105,52 @@ items to include in the backpack such that the total value of the selected items
 }
 ```
 
-## 
+## [416. Partition Equal Subset Sum](https://leetcode.com/problems/partition-equal-subset-sum/description/)
 
+Given an integer array `nums`, return `true` if you can partition the array into two subsets such that the sum of the elements in both subsets is equal or `false` otherwise.
 
+ **Example 1:**
+
+**Input:** nums = [1,5,11,5]<br>
+**Output:** true <br>
+**Explanation:** The array can be partitioned as [1, 5, 5] and [11].
+
+**Ideas:**
+1. Define the dp Array and Its Index Meaning
+  The definition of `dp[j]` is: the maximum value that can be achieved by selecting items from the range (0, i) to place in a backpack with capacity j.
+* Not placing item i: The value remains dp[j].
+* Placing item i: The value is dp[j-nums[i] + nums[i].
+2. Determine the Recurrence Relation (State Transition Equation)
+  Since we want to maximize the total value of the backpack within its capacity, we take the maximum of the two cases. The recurrence relation is:
+  `dp[j] = Math.max(dp[j], dp[j-nums[i]] + nums[i])`
+4. Initialize the dp Array
+   dp[j] = 0, when the capacity of bag is 0, the maximal value of this bag is 0 too.
+5. Determine the Traversal Order
+  We can only use reverse iteration to ensure that each item is used only once.
+
+```Java
+public class PartitionEqualSubsetSum {
+    public boolean canPartition(int[] nums) {
+        if(nums == null || nums.length == 0) return false;
+        int n = nums.length;
+        int sum = 0;
+        for(int num : nums){
+            sum += num;
+        }
+        if(sum % 2 != 0) return false;
+        int target = sum / 2;
+        int[] dp = new int[target+1];
+
+        for (int i = 0; i < n; i++) {
+            for (int j = target; j >= nums[i] ; j--) {
+                dp[j] = Math.max(dp[j],dp[j-nums[i]] + nums[i]);
+            }
+            if(dp[target] == target) return true;
+        }
+        return target == dp[target];
+    }
+}
+```
 
 
 
