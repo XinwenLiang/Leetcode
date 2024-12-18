@@ -33,7 +33,7 @@ we can combine 1 and 1 to get 0, so the array converts to [1], then that's the o
 5. Determine the Traversal Order
   We can only use reverse iteration to ensure that each item is used only once.
 
-  ```Java
+  ``` Java
   public class LastStonesWeight {
     public int lastStoneWeightII(int[] stones) {
         int n = stones.length;
@@ -52,7 +52,7 @@ we can combine 1 and 1 to get 0, so the array converts to [1], then that's the o
         return sum - 2 * dp[target];
     }
 }
-
+```
 
 ## [494. Target Sum](https://leetcode.com/problems/target-sum/description/)
 
