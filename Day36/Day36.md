@@ -28,9 +28,9 @@ we can combine 1 and 1 to get 0, so the array converts to [1], then that's the o
 2. Determine the Recurrence Relation (State Transition Equation)
   Since we want to maximize the total value of the backpack within its capacity, we take the maximum of the two cases. The recurrence relation is:
   `dp[j] = Math.max(dp[j], dp[j-stones[i]] + stones[i])`
-4. Initialize the dp Array
+3. Initialize the dp Array
    dp[j] = 0, when the capacity of bag is 0, the maximal weight of this bag is 0 too.
-5. Determine the Traversal Order
+4. Determine the Traversal Order
   We can only use reverse iteration to ensure that each item is used only once.
 
   ``` Java
@@ -85,9 +85,9 @@ Here, `x` is the bag size, which is the knapsack capacity we aim to calculate in
   The definition of `dp[j]` is: There exist dp[j] methods to fill a bag with capacity of j.
 2. Determine the Recurrence Relation (State Transition Equation)
  `dp[j] += dp[j-nums[i]]`
-4. Initialize the dp Array
+3. Initialize the dp Array
    dp[0] = 1, cause if nums={0}, we can only put one item in this bag.
-5. Determine the Traversal Order
+4. Determine the Traversal Order
   We can only use reverse iteration to ensure that each item is used only once.
 
 ```Java
@@ -112,15 +112,60 @@ public class TargetSum {
 }
 ```
 
-## [
+## [474. Ones and Zeros](https://leetcode.com/problems/ones-and-zeroes/description/)
 
+You are given an array of binary strings `strs` and two integers `m` and `n`.
 
+Return *the size of the largest subset of `strs` such that there are at most `m 0's` and `n 1's` in the subset.
 
+A set x is a subset of a set y if all elements of x are also elements of y.
 
+**Example 1:**
 
+**Input:** strs = ["10","0001","111001","1","0"], m = 5, n = 3 <br>
+**Output:** 4 <br>
+**Explanation:** The largest subset with at most 5 0's and 3 1's is {"10", "0001", "1", "0"}, so the answer is 4.<br>
+Other valid but smaller subsets include {"0001", "1"} and {"10", "1", "0"}.<br>
+{"111001"} is an invalid subset because it contains 4 1's, greater than the maximum of 3.
 
+**Ideas:**
+Fisrt, we need to count how many 0's and 1's in `str`,and this represents the weight of items. And `m` and `n` represent the capacity of this bag,
+1. Define the dp Array and Its Index Meaning
+  The definition of `dp[i][j]` is: The size of the largest subset of strs that contains at mt most i zeros and j ones is represented by dp[i][j].
+2. Determine the Recurrence Relation (State Transition Equation)
+ `dp[i][j] = Math.max(dp[i-x][j-y]+1, dp[i][j])`
+3. Initialize the dp Array
+   dp[0] = 0.
+4. Determine the Traversal Order
+  We can only use reverse iteration to ensure that each item is used only once.
 
+```Java
+public class OneAndZero {
+    public int findMaxForm(String[] strs, int m, int n) {
+        int[][]dp = new int[m+1][n+1];
+        int x; // Record the number of 0's
+        int y; // Record the number of 1's
+        for(String str:strs){
+            x = 0;
+            y = 0;
+            for(char ch :str.toCharArray()){
+                if(ch == '0'){
+                    x++;
+                }else{
+                    y++;
+                }
+            }
+            for (int i = m; i >= x; i--) {
+                for (int j = n; j >= y ; j--) {
+                    dp[i][j]= Math.max(dp[i][j], dp[i-x][j-y] + 1);
+                }
 
+            }
+        }
+        return dp[m][n];
+    }
+}
+```
 
 
 
