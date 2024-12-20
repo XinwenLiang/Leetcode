@@ -1,5 +1,5 @@
 # 代码随想录算法训练营第三十八天
-## [279. Perfect Squares]（https://leetcode.com/problems/perfect-squares/description/）
+## [279. Perfect Squares](https://leetcode.com/problems/perfect-squares/description/）
 
 Given an integer `n`, return *the least number of perfect square numbers that sum to n*.
 
