@@ -84,10 +84,58 @@ public class HouseRobberII {
 }
 ```
 
-## [
+## [337. House Robber III](https://leetcode.com/problems/house-robber-iii/description/)
 
+The thief has found himself a new place for his thievery again. There is only one entrance to this area, called `root`.
 
+Besides the `root`, each house has one and only one parent house. After a tour, the smart thief realized that all houses in this place form a binary tree. It will automatically contact the police if **two directly-
+linked houses were broken into on the same night.**
 
+Given the `root` of the binary tree, return the maximum amount of money the thief can rob **without alerting the police**.
+
+**Example1**
+![image](https://github.com/user-attachments/assets/31c41022-b04d-4158-b6ac-2221af785e75)
+
+**Input:** root = [3,2,3,null,3,null,1] <br>
+**Output:** 7 <br>
+**Explanation:** Maximum amount of money the thief can rob = 3 + 3 + 1 = 7.
+
+**Ideas:**
+1. Define the dp Array and Its Index Meaning
+ * dp[0] records the maximum amount of money obtained without robbing the current node.
+ * dp[1] records the maximum amount of money obtained by robbing the current node.
+2. Determine the Recurrence Relation (State Transition Equation)
+ while traversing the tree, if an empty node is encountered, it's clear that both robbing and not robbing it yield 0. Hence, return 0 in this case.
+3. Use post-order traversal:
+   It’s crucial to use post-order traversal because the next step’s calculation depends on the return values from the recursive function.
+* By recursively processing the left child node, you get the maximum money when robbing and not robbing the left child.
+* Similarly, by recursively processing the right child node, you get the maximum money when robbing and not robbing the right child.
+4. Single-level recursive logic:
+* If you rob the current node, its left and right children cannot be robbed. Thus: `val1 = root.val + left[0] + right[0]`;
+* If you don’t rob the current node, its left and right children can be robbed. Whether they are robbed or not depends on which yields the maximum value:
+`val2 = max(left[0], left[1]) + max(right[0], right[1])`; <br>
+Finally, the current node's state is represented as {val2, val1}, meaning: <br>
+{Maximum money obtained without robbing the current node, maximum money obtained by robbing the current node}.
+
+```Java
+public class HouseRobberIII {
+    public int rob(TreeNode root) {
+        int[] dp = robAction(root);
+        return Math.max(dp[0], dp[1]);
+    }
+    int[] robAction(TreeNode root){
+        int[] dp = new int[2];
+        if(root == null) return dp;
+        // Post-order Traversal.
+        int[] left = robAction(root.left);
+        int[] right = robAction(root.right);
+
+        dp[0] = Math.max(left[0], left[1]) + Math.max(right[0], right[1]);
+        dp[1] = root.val + left[0] + right[0];
+        return dp;
+    }
+}
+```
 
 
 
