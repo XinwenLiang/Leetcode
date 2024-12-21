@@ -16,12 +16,12 @@ Total amount you can rob = 1 + 3 = 4.
 **Ideas:**
 1. Define the dp Array and Its Index Meaning
   The definition of `dp[i]` is: Consider the maximum amount of money stolen at index `i` as `dp[i]`
-  * If rob house i, dp[i] = dp[i-2] + nums[i]
-  * If not rob house i, dp[i] = dp[i-1]
+  * If rob house `i`, `dp[i] = dp[i-2] + nums[i]`;
+  * If not rob house `i`, `dp[i] = dp[i-1]`
 2. Determine the Recurrence Relation (State Transition Equation)
  `dp[i] = Math.max(dp[i-2] + nums[i],dp[i-1])`
 3. Initialize the dp Array
-   dp[0] = nums[0], dp[1] = Math.max(nums[0], nums[1]).
+   `dp[0] = nums[0]`, `dp[1] = Math.max(nums[0], nums[1])`.
 4. Determine the Traversal Order
    The traversal order should be from smaller to larger indices.
 
