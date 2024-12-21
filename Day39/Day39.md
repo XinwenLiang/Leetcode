@@ -41,9 +41,50 @@ public class RobHouse {
 }
 ```
 
+## [213. House Robber II](https://leetcode.com/problems/house-robber-ii/description/)
 
+You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed. All houses at this place are **arranged in a circle**. That means the first house is the neighbor 
+of the last one. Meanwhile, adjacent houses have a security system connected, and **it will automatically contact the police if two adjacent houses were broken into on the same night**.
 
+Given an integer array `nums` representing the amount of money of each house, return *the maximum amount of money you can rob tonight without alerting the police*.
 
+**Example 1:**
+
+**Input:** nums = [2,3,2] <br>
+**Output:** 3<br>
+**Explanation:** You cannot rob house 1 (money = 2) and then rob house 3 (money = 2), because they are adjacent houses.
+
+**Ideas:**
+For this problem, we need to consider three cases:
+* Exclude both the first and last elements.
+* Include the first element but exclude the last.
+* Include the last element but exclude the first.
+However, the first case is actually covered by the latter two cases, so we only need to consider cases 2 and 3. Then, based on the solution for the first problem, we can simply extract the relevant subarrays for
+calculation.
+
+```Java
+public class HouseRobberII {
+    public int rob(int[] nums) {
+        if(nums == null || nums.length == 0) return 0;
+        if(nums.length == 1) return nums[0];
+        int len = nums.length;
+        return Math.max(robAction(nums,0, len-1), robAction(nums,1, len));
+    }
+    int robAction(int[] nums, int start, int end){
+        int temp1 = 0;
+        int temp2 = 0;
+        int result = 0;
+        for (int i = start; i < end; i++) {
+            temp1 = result;
+            result = Math.max(temp2 + nums[i], temp1);
+            temp2 = temp1;
+        }
+        return result;
+    }
+}
+```
+
+## [
 
 
 
