@@ -90,11 +90,43 @@ public class LengthOfLCIS {
 }
 ```
 
+## [718. Maximum Length of Repeated Subarray](https://leetcode.com/problems/maximum-length-of-repeated-subarray/description/)
 
+Given two integer arrays `nums1` and `nums2`, return the maximum length of a subarray that appears in both arrays.
 
+**Example 1:**
 
+**Input:** nums1 = [1,2,3,2,1], nums2 = [3,2,1,4,7]
+**Output:** 3
+**Explanation:** The repeated subarray with maximum length is [3,2,1].
 
+**Ideas:**
+1. Define the dp Array and Its Index Meaning
+   dp[i][j] represents the length of the longest repeated subarray ending in nums1[i-1] and nums2[j-1].
+2. Determine the Recurrence Relation (State Transition Equation)
+   if(nums1[i-1] == nums2[j-1]) dp[i][j] = dp[i-1][j-1] + 1;
+3. Initialize the dp array.
+   dp[i][0] = dp[0][j] = 0;
+4. Determine the Traversal Order
+   traverse from front to back and return the largest number in dp array.
 
+```Java
+public class LongestRepeatedSubarray {
+    public int findLength(int[] nums1, int[] nums2) {
+        int[][] dp = new int[nums1.length +1][nums2.length + 1];
+        int res = 0;
+        for (int i = 1; i < nums1.length + 1; i++) {
+            for (int j = 1; j < nums2.length + 1; j++) {
+                if (nums1[i - 1] == nums2[j - 1]) {
+                    dp[i][j] = dp[i - 1][j - 1] + 1;
+                    res = Math.max(res, dp[i][j]);
+                }
+            }
+        }
+        return res;
+    }
+}
+```
 
 
 
