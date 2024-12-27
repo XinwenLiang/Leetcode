@@ -16,7 +16,7 @@ A **common subsequence** of two strings is a subsequence that is common to both 
 
 **Ideas:**
 1. Define the dp Array and Its Index Meaning
-   dp[i][j] represents the length of the longest repeated subarray ending in nums1[i-1] and nums2[j-1].
+   dp[i][j] represents the length of the longest common subsequence ending in nums1[i-1] and nums2[j-1].
 2. Determine the Recurrence Relation (State Transition Equation)
    ```Java
    if(nums1[i-1] == nums2[j-1]) dp[i][j] = dp[i-1][j-1] + 1;
@@ -103,13 +103,89 @@ public class UncrossedLines {
 }
 ```
 
+## [53. Maximum Subarray](https://leetcode.com/problems/maximum-subarray/description/)
 
+Given an integer array `nums`, find the subarray with the largest sum, and return its sum.
 
+**Example 1:**
 
+**Input:** nums = [-2,1,-3,4,-1,2,1,-5,4] <br>
+**Output:** 6 <br>
+**Explanation:** The subarray [4,-1,2,1] has the largest sum 6.
 
+1. Define the dp Array and Its Index Meaning
+   dp[i]represents the length of the longest repeated subarray ending in nums[i].
+2. Determine the Recurrence Relation (State Transition Equation)
+   dp[i] = Math.max(dp[i-1] + nums[i], nums[i])
+3. Initialize the dp array.
+   dp[0] = nums[0];
+4. Determine the Traversal Order
+   traverse from front to back.
 
+```Java
+public class MaximumSubarray {
+    public int maxSubArray(int[] nums) {
+        if(nums == null || nums.length == 0) return 0;
+        int[] dp = new int[nums.length];
+        dp[0] = nums[0];
+        int result = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            dp[i] = Math.max(dp[i-1] + nums[i], nums[i]);
+            result = Math.max(result, dp[i]);
+        }
+        return result;
+    }
+}
+```
 
+## [392. Is Subsequence](https://leetcode.com/problems/is-subsequence/description/)
 
+Given two strings `s` and `t`, return *true if s is a subsequence of t, or false otherwise*.
+
+A subsequence of a string is a new string that is formed from the original string by deleting some (can be none) of the characters without disturbing the relative positions of the remaining characters. (i.e., "ace" 
+is a subsequence of "abcde" while "aec" is not).
+
+**Example 1:**
+
+**Input:** s = "abc", t = "ahbgdc" <br>
+**Output:** true <br>
+**Example 2:**
+
+**Input:** s = "axc", t = "ahbgdc" <br>
+**Output:** false 
+
+**Ideas:**
+1. Define the dp Array and Its Index Meaning
+   dp[i][j] represents the length of the same subsequence ending in s[i-1] and t[j-1].
+2. Determine the Recurrence Relation (State Transition Equation)
+   ```Java
+   if(s[i-1] == t[j-1]) dp[i][j] = dp[i-1][j-1] + 1;
+   else dp[i][j] = dp[i][j-1];//Delete the ith element of t.
+   ```
+3. Initialize the dp array.
+   dp[i][0] = dp[0][j] = 0;
+4. Determine the Traversal Order
+   traverse from left to right and from up to down.
+
+```Java
+public class IsSubsequence {
+    public boolean isSubsequence(String s, String t) {
+        char[] nums1 = s.toCharArray();
+        char[] nums2 = t.toCharArray();
+        int[][] dp = new int[nums1.length + 1][nums2.length + 1];
+        for (int i = 1; i <= nums1.length ; i++) {
+            for (int j = 1; j <= nums2.length ; j++) {
+                if(nums1[i-1] == nums2[j-1]){
+                    dp[i][j] = dp[i-1][j-1] + 1;
+                }else{
+                    dp[i][j] = dp[i][j-1];
+                }
+            }
+        }
+        return dp[nums1.length][nums2.length] == nums1.length;
+    }
+}
+```
 
 
 
