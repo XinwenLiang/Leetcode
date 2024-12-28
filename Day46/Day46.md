@@ -1,5 +1,5 @@
 # 代码随想录算法训练营第四十六天
-## [647. Palindromic Substrings](https://leetcode.com/problems/palindromic-substrings/description/）
+## [647. Palindromic Substrings](https://leetcode.com/problems/palindromic-substrings/description/)
 
 Given a string `s`, return *the number of palindromic substrings in it*.
 
