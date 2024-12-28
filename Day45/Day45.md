@@ -103,11 +103,61 @@ public class DeleteOperation {
 }
 ```
 
+## [72. Edit Distance](https://leetcode.com/problems/edit-distance/description/)
 
+Given two strings `word1` and `word2`, return *the minimum number of operations required to convert word1 to word2*.
 
+You have the following three operations permitted on a word:
+* Insert a character
+* Delete a character
+* Replace a character
+ 
+**Example 1:**
 
+**Input:** word1 = "horse", word2 = "ros" <br>
+**Output:** 3<br>
+**Explanation:** <br> 
+horse -> rorse (replace 'h' with 'r') <br>
+rorse -> rose (remove 'r')<br>
+rose -> ros (remove 'e')
 
+**Ideas:**
+1. Define the dp Array and Its Index Meaning
+   dp[i][j] represents the minimum number of operations required to make word1, ending with i−1, the same as word2, ending with j−1.
+2. Determine the Recurrence Relation (State Transition Equation)
+   if(word1[i-1] == word2[j-1]) dp[i][j] = dp[i-1][j-1];//No delete operation.
+   else dp[i][j] = min(dp[i-1][j]+1, dp[i][j-1]+1,dp[i-1][j-1]+1)
+   Because delete an element in one array just the same as add an element in another array. dp[i-1][j-1]+1 models the replace operation.
+3. Initialize the dp array.
+   dp[i][0] = i; dp[0][j] = j;
+4. Determine the Traversal Order
+   traverse from left to right and from up to down.
 
+```Java
+public class EditDistance {
+    public int minDistance(String word1, String word2) {
+        char[] nums1 = word1.toCharArray();
+        char[] nums2 = word2.toCharArray();
+        int[][] dp = new int[nums1.length + 1][nums2.length + 1];
+        for (int i = 0; i <= nums1.length; i++) {
+            dp[i][0] = i;
+        }
+        for (int j = 0; j <= nums2.length ; j++) {
+            dp[0][j] = j;
+        }
+        for (int i = 1; i <= nums1.length ; i++) {
+            for (int j = 1; j <= nums2.length ; j++) {
+                if(nums1[i-1] == nums2[j-1]){
+                    dp[i][j]=dp[i-1][j-1];
+                }else{
+                    dp[i][j] = Math.min(Math.min(dp[i-1][j]+1,dp[i][j-1]+1),dp[i-1][j-1]+1);
+                }
+            }
+        }
+        return dp[nums1.length][nums2.length];
+    }
+}
+```
 
 
 
