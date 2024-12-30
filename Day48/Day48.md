@@ -1,2 +1,116 @@
 # 代码随想录算法训练营第四十八天
-## 
+## [739. Daily Temperatures](https://leetcode.com/problems/daily-temperatures/description/)
+
+Given an array of integers `temperatures` represents the daily temperatures, return an array `answer` such that `answer[i]` is the number of days you have to wait after the `ith` day to get a warmer temperature. If there 
+is no future day for which this is possible, keep `answer[i] == 0` instead.
+
+**Example 1:**
+
+**Input:** temperatures = [73,74,75,71,69,72,76,73] <br>
+**Output:** [1,1,4,2,1,1,0,0]
+
+**Ideas:**
+We can immediately think of using a data structure to store the elements for this problem. Since the task is to find the distance to the first greater element after the current one, we can consider using a monotonic 
+stack. The stack will maintain a strictly increasing order from the top to the bottom, and it will store the indices of the elements.
+
+For each current element, we compare it with the element at the top of the stack. If the current element is smaller than or equal to the top element, we push its index onto the stack and continue. If the current 
+element is greater, we collect the result, pop the top element from the stack, and then push the current element's index onto the stack.
+
+```Java
+public class DailyTemperature {
+    public int[] dailyTemperatures(int[] temperatures) {
+        int[] result = new int[temperatures.length];
+
+        Deque<Integer> st = new LinkedList<>();
+        st.push(0); // Default to put the first element.
+        for (int i = 1; i < temperatures.length; i++) {
+                while (! st.isEmpty() && temperatures[i] > temperatures[st.peek()]) {
+                    result[st.peek()] = i - st.peek();
+                    st.pop();
+                }
+                st.push(i);
+            }
+        return result;
+    }
+}
+```
+
+## [496. Next Greater ElementI](https://leetcode.com/problems/next-greater-element-i/)
+
+The **next greater element** of some element `x` in an array is the **first greater** element that is **to the right** of `x` in the same array.
+
+You are given two **distinct 0-indexed** integer arrays `nums1` and `nums2`, where `nums1` is a subset of `nums2`.
+
+For each `0 <= i < nums1.length`, find the index `j` such that `nums1[i] == nums2[j]` and determine the next greater element of `nums2[j]` in `nums2`. If there is no next greater element, then the answer for this 
+query is `-1`.
+
+Return *an array `ans` of length `nums1.length` such that `ans[i]` is the next greater element as described above*.
+
+**Example 1:**
+
+**Input:** nums1 = [4,1,2], nums2 = [1,3,4,2] <br>
+**Output:** [-1,3,-1] <br>
+**Explanation:** The next greater element for each value of nums1 is as follows: <br>
+- 4 is underlined in nums2 = [1,3,4,2]. There is no next greater element, so the answer is -1. <br>
+- 1 is underlined in nums2 = [1,3,4,2]. The next greater element is 3. <br>
+- 2 is underlined in nums2 = [1,3,4,2]. There is no next greater element, so the answer is -1. <br>
+
+**Ideas:**
+For this problem, we need to define a `result` array with the same size as `nums1`, initialized with default values of `-1`. Then, we use a map to store the elements of `nums1`, and a monotonic stack to perform the 
+element mapping operations.
+
+```Java
+public class NextGreaterElement {
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        int[] result = new int[nums1.length];
+        Arrays.fill(result, -1);
+        Deque<Integer> st = new LinkedList<>();
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
+
+        if(nums1.length == 0) return result;
+        // Put elements of nums1 into the hashMap.
+        for (int i = 0; i < nums1.length; i++) {
+            hashMap.put(nums1[i],i);
+        }
+        st.push(0);
+        for (int i = 1; i < nums2.length ; i++) {
+            if(nums2[i] <= nums2[st.peek()]){
+                    st.push(i);
+            }else{
+                while(!st.isEmpty() && nums2[i] > nums2[st.peek()]){
+                    int index = st.pop();
+                    if(hashMap.containsKey(nums2[index])){
+                        int resultIndex = hashMap.get(nums2[index]);
+                        result[resultIndex] = nums2[i];
+                    }
+                }
+                st.push(i);
+            }
+        }
+        return result;
+    }
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
