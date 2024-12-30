@@ -92,7 +92,48 @@ public class NextGreaterElement {
 }
 ```
 
+## [503. Next Greater ElementII](https://leetcode.com/problems/next-greater-element-ii/description/)
 
+Given a circular integer array `nums` (i.e., the next element of `nums[nums.length - 1]` is `nums[0]`), return *the next greater number for every element in nums*.
+
+The next greater number of a number x is the first greater number to its traversing-order next in the array, which means you could search circularly to find its next greater number. If it doesn't exist, return `-1` 
+for this number.
+
+**Example 1:**
+
+**Input:** nums = [1,2,1] <br>
+**Output:** [2,-1,2] <br>
+**Explanation:** The first 1's next greater number is 2; <br> 
+The number 2 can't find next greater number. <br>
+The second 1's next greater number needs to search circularly, which is also 2.
+
+**Ideas:**
+This problem differs from the previous one in that it requires simulating a circular array. Naturally, we might think of extending the length of the original array to simulate the circle, but this approach results in 
+a time complexity of O（n*n)
+
+Another approach is to iterate through the array twice while using the **modulo operation** to simulate the circular behavior. This cleverly mimics the circular array without actually extending its length.
+
+During the first attempt, we can implement the solution using the first approach based on extending the array length.
+
+```Java
+public class NextGreaterElementII {
+    public int[] nextGreaterElements(int[] nums) {
+        int[] result = new int[nums.length];
+        Arrays.fill(result, -1);
+        Deque<Integer> st = new LinkedList<>();
+
+        st.push(0); // Default to put the first element.
+        for (int i = 1; i < nums.length * 2; i++) {
+            while (!st.isEmpty() && nums[i % nums.length] > nums[st.peek()]) {
+                result[st.peek()] = nums[i% nums.length];
+                st.pop();
+            }
+            st.push(i % nums.length);
+        }
+        return result;
+    }
+}
+```
 
 
 
