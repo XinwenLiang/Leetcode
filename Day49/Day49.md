@@ -112,12 +112,58 @@ public class TrappingRainWaterIII {
 }
 ```
 
+## [84. Largest Rectangle in Histogram](https://leetcode.com/problems/largest-rectangle-in-histogram/description/)
 
+Given an array of integers `heights` representing the histogram's bar height where the width of each bar is `1`, return *the area of the largest rectangle in the histogram*.
 
+**Example 1:**
+![image](https://github.com/user-attachments/assets/b219d401-662b-43cd-92c1-3604cdec8623)
 
+**Input:** heights = [2,1,5,6,2,3] <br>
+**Output:** 10 <br>
+**Explanation:** The above is a histogram where width of each bar is 1. <br>
+The largest rectangle is shown in the red area, which has an area = 10 units.
 
+**Ideas:**
+We need a monotonically decreasing stack to record the heights of the bars that have been traversed. The mid represents the top element of the stack, which corresponds to the current bar. We then find the bars on the 
+left and right that are lower than mid and calculate the width.
 
+The left element is the new top of the stack after popping mid, and the right element is the current index i being traversed. The height is determined by `h = height[mid]`, and the width is `w = right - left - 1`. 
+Finally, we calculate `h * w` to find the maximum area, which is the desired result.
 
+To ensure we include the first and last bars in the calculation, we add a height of 0 at both the beginning and end of the array.
+
+```Java
+public class LargestRectangleArea {
+    int largestRectangleArea(int[] heights) {
+        int[] height = new int[heights.length + 2];
+        Deque<Integer> st = new LinkedList<>();
+        height[0] = 0;
+        height[height.length - 1] = 0;
+        System.arraycopy(heights, 0, height, 1, heights.length);
+        st.push(0);
+        int result = 0;
+        for (int i = 1; i < height.length ; i++) {
+            if(height[i] > height[st.peek()]){
+                st.push(i);
+            }else{
+                while(!st.isEmpty() && height[i] < height[st.peek()]){
+                    int mid = st.peek();
+                    st.pop();
+                    if(! st.isEmpty()) {
+                        int left = st.peek();
+                        int h = height[mid];
+                        int w = i - left - 1;
+                        result = Math.max(result, h*w);
+                    }
+                }
+                st.push(i);
+            }
+        }
+        return result;
+    }
+}
+```
 
 
 
