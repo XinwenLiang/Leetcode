@@ -76,6 +76,7 @@ public class TotalArea {
         }
     }
 }
+```
 
 
 ## [102. Sinking Islands](https://kamacoder.com/problempage.php?pid=1174)
