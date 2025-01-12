@@ -143,7 +143,8 @@ An algorithm for finding the shortest path from a starting node to all other nod
 1. Select the nearest unvisited node from the source node.
 2. Mark the selected node as visited.
 3. Update the distances of unvisited nodes from the source node (i.e., update the minDist array).
-   We use the minDist array to keep track of the minimum distance from the source node to each node. Below is the simulation process.
+We use the minDist array to keep track of the minimum distance from the source node to each node. Below is the simulation process.
+
 
 1. Initialize:
    ![image](https://github.com/user-attachments/assets/4dae0043-e7e3-46bd-97d8-9ccffae2ff21)
