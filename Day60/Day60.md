@@ -41,7 +41,7 @@ The following m lines each contain three integers s, t, and v, representing:
 We can add nodes to the queue one by one and then perform relaxation by dequeuing the front element. An optimization can be applied during the enqueueing process: use a `visited` array to record elements that are 
 already in the queue, so we don't enqueue the same element multiple times.
 
-## [Intercity Cargo Transportation II](https://kamacoder.com/problempage.php?pid=1153)
+## [95. Intercity Cargo Transportation II](https://kamacoder.com/problempage.php?pid=1153)
 
 **Problem Description**
 A certain country wants to promote economic exchange between cities and has decided to subsidize cargo transportation. There are n cities numbered from 1 to n, connected by a road network. Each road allows one-way 
@@ -90,9 +90,105 @@ The next m lines each contain three integers s, t, and v:
 **Sample Output** circle
 
 **Ideas:**
+Let's loosen it up one more time on top of the original and see what happens.
 
+```Java
+public class SPFAII {
+    static class Edge{
+        int from;
+        int to;
+        int val;
 
+        public Edge(int from, int to, int val) {
+            this.from = from;
+            this.to = to;
+            this.val = val;
+        }
+    }
 
+    public static void main(String[] args) {
+        Scanner myScanner = new Scanner(System.in);
+        int n = myScanner.nextInt();
+        int m = myScanner.nextInt();
+        List<List<Edge>> graph = new ArrayList<>();
+
+        for (int i = 0; i <= n; i++) {
+            graph.add(new ArrayList<>());
+        }
+        for (int i = 0; i < m; i++) {
+            int from = myScanner.nextInt();
+            int to = myScanner.nextInt();
+            int val = myScanner.nextInt();
+            graph.get(from).add(new Edge(from, to, val));
+        }
+
+        int[] minDist = new int[n+1];
+        Arrays.fill(minDist, Integer.MAX_VALUE);
+        minDist[1] = 0;
+
+        Queue<Integer> queue = new LinkedList<>();
+        queue.offer(1);
+
+        int[] count = new int[n+1];
+        count[1] ++;
+
+        boolean[] isInQueue = new boolean[n+1];
+        boolean flag = false;
+
+        while(!queue.isEmpty()){
+            int curNode = queue.poll();
+            isInQueue[curNode] = false;
+            for(Edge edge: graph.get(curNode)){
+                if(minDist[edge.to] > minDist[edge.from] + edge.val){
+                    minDist[edge.to] = minDist[edge.from] + edge.val;
+                    if(! isInQueue[edge.to]){
+                        queue.offer(edge.to);
+                        count[edge.to] ++;
+                        isInQueue[edge.to] = true;
+                    }
+
+                    if(count[edge.to] == n){
+                        flag = true;
+                        while(!queue.isEmpty()) queue.poll();
+                        break;
+                    }
+                }
+            }
+        }
+        if(flag){
+            System.out.println("circle");
+        }else if(minDist[n] == Integer.MAX_VALUE){
+            System.out.println("unconnected");
+        }else{
+            System.out.println(minDist[n]);
+        }
+    }
+}
+```
+
+## [96.Intercity Cargo Transportation III](https://kamacoder.com/problempage.php?pid=1154)
+A country has decided to subsidise the transport of goods in order to promote economic exchanges between cities. There are `n` cities, numbered `1` to `n`, connected by a network of roads that allow one-way traffic 
+only from one city to another, not in the opposite direction.
+
+Each road in the network has its own transport cost and government subsidy, and the weights of the roads are calculated as: `transport cost - government subsidy`.
+* A positive weight indicates the cost of transporting the goods after deducting the government subsidy;
+* A negative weighting means that the government subsidy exceeds the cost of transport, which in reality means that a certain amount of revenue is earned during the transport.
+
+Calculate the minimum cost of transporting the goods from city src to city dst if at most `k` cities are passed through.
+
+**Input Description**
+
+The first line contains two positive integers, the first positive integer n means that there are n cities in the country, and the second integer m means that there are m roads in these cities.
+
+The second integer, m, indicates that there are m roads in these cities. The next m rows, each containing three integers, s, t, and v, indicate that city s is transporting goods to city t, and the weight of the road 
+is v. The last row contains three positive integers, s, t, and v.
+
+The last line contains three positive integers, src, dst, and k. src and dst are the city numbers, and there is a limit on the number of cities passing from src to dst.
+
+**Output Description**
+
+Output an integer indicating the minimum transport cost from city src to city dst. If the path from src to dst cannot be found within the given number of cities passed through, output ‘unreachable’, indicating that 
+there is no eligible transport solution.
 
 
 
